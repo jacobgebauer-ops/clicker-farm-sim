@@ -1,0 +1,15 @@
+[
+  {"id": "h_yield", "name": "Heirloom Vigor", "desc": "Everything sells for 10% more per level.", "maxLevel": 10, "costs": [1, 2, 3, 4, 5, 6, 8, 10, 12, 15], "effect": {"type": "sellMult", "value": 0.1}},
+  {"id": "h_speed", "name": "Old Soil Wisdom", "desc": "Crops grow 5% faster per level.", "maxLevel": 8, "costs": [1, 2, 3, 4, 6, 8, 10, 12], "effect": {"type": "growSpeed", "value": 0.05}},
+  {"id": "h_offline", "name": "Good Neighbors", "desc": "The farm keeps working 1 more hour while you are away (up to 16 hours).", "maxLevel": 6, "costs": [1, 2, 3, 4, 5, 6], "effect": {"type": "offlineHours", "value": 1}},
+  {"id": "h_kitchen", "name": "Grandma's Recipe Box", "desc": "One more kitchen queue slot per level.", "maxLevel": 3, "costs": [2, 4, 6], "effect": {"type": "kitchenSlots", "value": 1}},
+  {"id": "h_cellar", "name": "Deep Cellar", "desc": "One more winery barrel per level.", "maxLevel": 3, "costs": [2, 4, 6], "effect": {"type": "cellarSlots", "value": 1}},
+  {"id": "h_almanac", "name": "Dog-eared Almanac", "desc": "Start each Heirloom Year with a higher Almanac level.", "maxLevel": 3, "costs": [2, 4, 7], "effect": {"type": "almanacStart", "value": 1}},
+  {"id": "h_start_coins", "name": "Rainy Day Jar", "desc": "Start each Heirloom Year with 2,000 more coins per level.", "maxLevel": 5, "costs": [1, 1, 2, 2, 3], "effect": {"type": "startCoins", "value": 2000}},
+  {"id": "h_creek_crops", "name": "Creek Bottom Seeds", "desc": "Unlocks watercress and cranberries, plus cranberry relish.", "maxLevel": 1, "costs": [3], "effect": {"type": "unlock", "value": 1, "flag": "heirloom:creek_crops"}},
+  {"id": "h_hillside_orchard", "name": "Hillside Orchard", "desc": "Unlocks cherry and quince trees, plus cherry clafoutis.", "maxLevel": 1, "costs": [5], "effect": {"type": "unlock", "value": 1, "flag": "heirloom:hillside_orchard"}, "prereq": ["h_creek_crops"]},
+  {"id": "h_beekeeping", "name": "Beekeeping", "desc": "Unlocks the Bee Garden in Selleck Woods, honey, and honey cake.", "maxLevel": 1, "costs": [6], "effect": {"type": "unlock", "value": 1, "flag": "heirloom:beekeeping"}, "prereq": ["h_creek_crops"]},
+  {"id": "h_decor_garden", "name": "Heirloom Garden Set", "desc": "Unlocks the gazebo, sundial, and bee skep decorations.", "maxLevel": 1, "costs": [2], "effect": {"type": "unlock", "value": 1, "flag": "heirloom:decor_set_garden"}},
+  {"id": "h_fair_line", "name": "County Fair Collection", "desc": "Unlocks the Fair cosmetic line: a rosette hat, ribbon board, and a tiny Ferris wheel.", "maxLevel": 1, "costs": [3], "effect": {"type": "unlock", "value": 1, "flag": "heirloom:fair_line"}},
+  {"id": "h_more_minigames", "name": "Fairground Games", "desc": "Reserves a spot for new mini games as they arrive in updates. Grants a ribbon bonus on every 3 star game.", "maxLevel": 1, "costs": [2], "effect": {"type": "unlock", "value": 1, "flag": "heirloom:more_minigames"}}
+]

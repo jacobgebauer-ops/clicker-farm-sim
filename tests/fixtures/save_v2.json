@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "createdAt": 1791100800000,
+  "lastSeen": 1791446400000,
+  "coins": 8800,
+  "ribbons": 6,
+  "xp": 2200,
+  "lifetimeCoins": 15400,
+  "inventory": { "pumpkin": 3, "milk": 4, "wine_blackberry@cellared": 2, "lumber": 10 },
+  "parcels": { "homestead": "restored", "coop_orchard": "cleared", "barn_pasture": "cleared", "north_field": "overgrown", "selleck_woods": "overgrown", "creek_bottom": "overgrown", "vineyard": "overgrown", "south_field": "overgrown", "roadside": "cleared" },
+  "buildings": { "farmhouse": { "stage": 2, "level": 4 }, "coop": { "stage": 2, "level": 2 }, "barn": { "stage": 2, "level": 1 }, "kitchen": { "stage": 1, "level": 0, "repairEndsAt": 1791450000000, "repairStartedAt": 1791446000000 }, "honor_box": { "stage": 2, "level": 3, "producedAt": 1791440000000 } },
+  "plots": [
+    { "id": "homestead_0", "parcel": "homestead", "x": 9, "y": 12, "cleared": true, "crop": "pumpkin", "plantedAt": 1791440000000, "readyAt": 1791468800000, "growMs": 28800000 }
+  ],
+  "animals": [
+    { "id": "an2", "kind": "hen", "name": "Henrietta", "bond": 0, "prodAt": 1791440000000, "stored": 2, "brushUntil": 0, "bornAt": 1791100800000, "hat": "hat_straw" },
+    { "id": "an5", "kind": "highland_cow", "name": "Fergus", "bond": 4, "prodAt": 1791440000000, "stored": 1, "brushUntil": 0, "bornAt": 1791300000000 }
+  ],
+  "quests": { "done": ["q_welcome", "q_first_plant", "q_tend", "q_first_harvest", "q_farmhouse", "q_claire_first", "q_coop_clear", "q_coop", "q_eggs", "q_barn_clear", "q_barn"] },
+  "stats": { "harvest": 300, "lunaTap": 7 },
+  "achievements": ["a_harvest_10", "a_harvest_100"],
+  "owned": { "cosmetics": ["hat_straw", "label_classic"], "decor": { "wooden_bench": 1 } },
+  "placed": [{ "uid": "dec9", "id": "wooden_bench", "x": 13, "y": 14, "rot": 0 }],
+  "settings": { "music": 0.5, "sfx": 0.7, "mute": true }
+}

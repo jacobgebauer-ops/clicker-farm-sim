@@ -1,0 +1,11 @@
+{
+  "basket": [
+    {"coins": 50},
+    {"coins": 80, "items": [{"id": "lumber", "qty": 3}]},
+    {"coins": 120},
+    {"ribbons": 1, "items": [{"id": "sugar", "qty": 3}, {"id": "flour", "qty": 3}]},
+    {"coins": 200, "items": [{"id": "nails", "qty": 5}]},
+    {"coins": 300, "items": [{"id": "paint", "qty": 2}]},
+    {"ribbons": 3, "coins": 400}
+  ]
+}

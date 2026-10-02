@@ -1,0 +1,143 @@
+[
+  {"id": "butter", "name": "Churned Butter", "inputs": [{"id": "milk", "qty": 2}], "craftMin": 10, "xp": 6, "tags": ["dairy", "white", "savory"], "unlock": {"building": "kitchen", "level": 0}, "color": "#FFE58A"},
+  {"id": "omelette", "name": "Fluffy Omelette", "inputs": [{"id": "egg", "qty": 3}], "craftMin": 6, "xp": 4, "tags": ["breakfast", "savory", "yellow"], "unlock": {"building": "kitchen", "level": 0}, "color": "#FFD43B"},
+  {"id": "radish_salad", "name": "Radish Salad", "inputs": [{"id": "radish", "qty": 4},{"id": "lettuce", "qty": 2}], "craftMin": 5, "xp": 4, "tags": ["green", "fresh", "savory"], "unlock": {"building": "kitchen", "level": 0}, "color": "#9FE3A0"},
+  {"id": "kale_chips", "name": "Kale Chips", "inputs": [{"id": "kale", "qty": 5}], "craftMin": 5, "xp": 3, "tags": ["green", "crunchy", "savory"], "unlock": {"building": "kitchen", "level": 0}, "color": "#3F8F55"},
+  {"id": "pickled_beans", "name": "Dilly Beans", "inputs": [{"id": "green_beans", "qty": 6}], "craftMin": 15, "xp": 4, "tags": ["green", "tart", "preserve"], "unlock": {"building": "kitchen", "level": 0}, "color": "#5DBB63"},
+  {"id": "herb_butter", "name": "Herb Butter", "inputs": [{"id": "butter", "qty": 1},{"id": "greenhouse_herbs", "qty": 3}], "craftMin": 10, "xp": 5, "tags": ["dairy", "green", "savory"], "unlock": {"building": "kitchen", "level": 0}, "color": "#C8E68A"},
+  {"id": "cheese", "name": "Highland Cheddar", "inputs": [{"id": "milk", "qty": 3}], "craftMin": 60, "xp": 12, "tags": ["dairy", "yellow", "savory", "aged"], "unlock": {"building": "kitchen", "level": 1}, "color": "#F7C548"},
+  {"id": "bread", "name": "Country Bread", "inputs": [{"id": "flour", "qty": 3},{"id": "milk", "qty": 1}], "craftMin": 30, "xp": 8, "tags": ["baked", "brown", "savory"], "unlock": {"building": "kitchen", "level": 1}, "color": "#C9925A"},
+  {"id": "strawberry_jam", "name": "Strawberry Jam", "inputs": [{"id": "strawberry", "qty": 3},{"id": "sugar", "qty": 1}], "craftMin": 20, "xp": 8, "tags": ["red", "sweet", "preserve"], "unlock": {"building": "kitchen", "level": 1}, "color": "#FF4F6E"},
+  {"id": "plum_jam", "name": "Plum Jam", "inputs": [{"id": "plum", "qty": 3},{"id": "sugar", "qty": 1}], "craftMin": 20, "xp": 10, "tags": ["purple", "sweet", "preserve"], "unlock": {"building": "kitchen", "level": 1}, "color": "#6E3A8C"},
+  {"id": "blackberry_jam", "name": "Blackberry Jam", "inputs": [{"id": "blackberry", "qty": 3},{"id": "sugar", "qty": 1}], "craftMin": 20, "xp": 9, "tags": ["purple", "sweet", "preserve"], "unlock": {"building": "kitchen", "level": 1}, "color": "#3B1F4F"},
+  {"id": "pickled_beans_spicy", "name": "Spicy Dilly Beans", "inputs": [{"id": "pickled_beans", "qty": 1},{"id": "garlic", "qty": 1}], "craftMin": 15, "xp": 6, "tags": ["green", "spicy", "preserve"], "unlock": {"building": "kitchen", "level": 2}, "color": "#7BAA3F"},
+  {
+    "id": "blackberry_cobbler",
+    "name": "Blackberry Cobbler",
+    "inputs": [
+      {"id": "blackberry", "qty": 3},
+      {"id": "flour", "qty": 1},
+      {"id": "butter", "qty": 1}
+    ],
+    "craftMin": 45,
+    "xp": 14,
+    "tags": ["purple","sweet","baked","dessert"],
+    "unlock": {"building": "kitchen", "level": 2},
+    "color": "#4B2A5E"
+  },
+  {"id": "apple_pie", "name": "Apple Pie", "inputs": [{"id": "apple", "qty": 3},{"id": "flour", "qty": 2},{"id": "butter", "qty": 1}], "craftMin": 60, "xp": 16, "tags": ["red", "sweet", "baked", "dessert"], "unlock": {"building": "kitchen", "level": 2}, "color": "#D9873A"},
+  {"id": "pumpkin_loaf", "name": "Pumpkin Loaf", "inputs": [{"id": "pumpkin", "qty": 1},{"id": "egg", "qty": 2},{"id": "flour", "qty": 1}], "craftMin": 40, "xp": 14, "tags": ["orange", "sweet", "baked"], "unlock": {"building": "kitchen", "level": 2}, "color": "#FF8A1F"},
+  {"id": "rhubarb_crisp", "name": "Rhubarb Crisp", "inputs": [{"id": "rhubarb", "qty": 2},{"id": "flour", "qty": 1},{"id": "sugar", "qty": 1}], "craftMin": 30, "xp": 10, "tags": ["red", "tart", "baked", "dessert"], "unlock": {"building": "kitchen", "level": 3}, "color": "#D94A6B"},
+  {"id": "zucchini_bread", "name": "Zucchini Bread", "inputs": [{"id": "zucchini", "qty": 2},{"id": "flour", "qty": 2},{"id": "egg", "qty": 1}], "craftMin": 35, "xp": 10, "tags": ["green", "baked", "sweet"], "unlock": {"building": "kitchen", "level": 3}, "color": "#8DAA5A"},
+  {"id": "tomato_sauce", "name": "Garden Tomato Sauce", "inputs": [{"id": "tomato", "qty": 4}], "craftMin": 20, "xp": 9, "tags": ["red", "savory", "preserve"], "unlock": {"building": "kitchen", "level": 3}, "color": "#E33B2E"},
+  {"id": "corn_chowder", "name": "Corn Chowder", "inputs": [{"id": "sweet_corn", "qty": 2},{"id": "milk", "qty": 1}], "craftMin": 25, "xp": 10, "tags": ["yellow", "savory", "soup"], "unlock": {"building": "kitchen", "level": 3}, "color": "#F5D76E"},
+  {
+    "id": "blueberry_muffins",
+    "name": "Blueberry Muffins",
+    "inputs": [
+      {"id": "blueberry", "qty": 2},
+      {"id": "flour", "qty": 1},
+      {"id": "egg", "qty": 1}
+    ],
+    "craftMin": 30,
+    "xp": 12,
+    "tags": ["blue","sweet","baked","breakfast"],
+    "unlock": {"building": "kitchen", "level": 4},
+    "color": "#5B74C9"
+  },
+  {"id": "pear_tart", "name": "Pear Tart", "inputs": [{"id": "pear", "qty": 2},{"id": "flour", "qty": 1},{"id": "butter", "qty": 1}], "craftMin": 45, "xp": 14, "tags": ["green", "sweet", "baked", "dessert", "fancy"], "unlock": {"building": "kitchen", "level": 4}, "color": "#D2C25A"},
+  {
+    "id": "caramel_apples",
+    "name": "Caramel Apples",
+    "inputs": [
+      {"id": "apple", "qty": 2},
+      {"id": "sugar", "qty": 2},
+      {"id": "milk", "qty": 1}
+    ],
+    "craftMin": 25,
+    "xp": 10,
+    "tags": ["red","sweet","dessert","festive"],
+    "seasons": ["fall"],
+    "unlock": {"building": "kitchen", "level": 1},
+    "color": "#B5651D"
+  },
+  {
+    "id": "peppermint_bark",
+    "name": "Peppermint Bark",
+    "inputs": [
+      {"id": "sugar", "qty": 2},
+      {"id": "milk", "qty": 1},
+      {"id": "greenhouse_herbs", "qty": 2}
+    ],
+    "craftMin": 25,
+    "xp": 10,
+    "tags": ["red","white","sweet","festive","dessert"],
+    "seasons": ["winter"],
+    "unlock": {"building": "kitchen", "level": 0},
+    "color": "#E5384F"
+  },
+  {
+    "id": "lavender_shortbread",
+    "name": "Lavender Shortbread",
+    "inputs": [
+      {"id": "lavender", "qty": 1},
+      {"id": "flour", "qty": 2},
+      {"id": "butter", "qty": 1}
+    ],
+    "craftMin": 30,
+    "xp": 14,
+    "tags": ["purple","sweet","baked","fancy"],
+    "unlock": {"building": "kitchen", "level": 5},
+    "color": "#B48AE0"
+  },
+  {"id": "leek_soup", "name": "Leek and Potato Soup", "inputs": [{"id": "leek", "qty": 2},{"id": "potato", "qty": 1},{"id": "milk", "qty": 1}], "craftMin": 40, "xp": 12, "tags": ["green", "savory", "soup"], "unlock": {"building": "kitchen", "level": 5}, "color": "#C9D98A"},
+  {"id": "sauerkraut", "name": "Crock Sauerkraut", "inputs": [{"id": "cabbage", "qty": 3}], "craftMin": 120, "xp": 12, "tags": ["green", "tart", "preserve", "aged"], "unlock": {"building": "kitchen", "level": 5}, "color": "#D8E3A0"},
+  {"id": "garden_quiche", "name": "Garden Quiche", "inputs": [{"id": "egg", "qty": 3},{"id": "flour", "qty": 1},{"id": "hardy_kale", "qty": 2}], "craftMin": 35, "xp": 12, "tags": ["green", "savory", "baked", "breakfast"], "unlock": {"building": "kitchen", "level": 6}, "color": "#E3C565"},
+  {"id": "tulip_bouquet", "name": "Tulip Bouquet", "inputs": [{"id": "tulip", "qty": 3}], "craftMin": 10, "xp": 6, "tags": ["pink", "pretty", "flower"], "unlock": {"quest": "q_claire_flowers"}, "color": "#FFB7D5"},
+  {"id": "sunflower_bouquet", "name": "Sunflower Bouquet", "inputs": [{"id": "sunflower", "qty": 3}], "craftMin": 10, "xp": 6, "tags": ["yellow", "pretty", "flower"], "unlock": {"quest": "q_claire_flowers"}, "color": "#FFC21F"},
+  {"id": "holiday_wreath", "name": "Holiday Wreath", "inputs": [{"id": "holly", "qty": 2},{"id": "evergreen_boughs", "qty": 2}], "craftMin": 30, "xp": 10, "tags": ["green", "red", "festive", "pretty"], "unlock": {"quest": "q_andrew_wreaths"}, "color": "#2E8B57"},
+  {
+    "id": "cranberry_relish",
+    "name": "Cranberry Relish",
+    "inputs": [
+      {"id": "cranberry", "qty": 3},
+      {"id": "sugar", "qty": 1}
+    ],
+    "craftMin": 20,
+    "xp": 10,
+    "tags": ["red","tart","preserve","festive"],
+    "unlock": {"building": "kitchen", "level": 0},
+    "color": "#B3183C",
+    "requires": "heirloom:creek_crops"
+  },
+  {
+    "id": "cherry_clafoutis",
+    "name": "Cherry Clafoutis",
+    "inputs": [
+      {"id": "cherry", "qty": 3},
+      {"id": "egg", "qty": 2},
+      {"id": "milk", "qty": 1}
+    ],
+    "craftMin": 45,
+    "xp": 16,
+    "tags": ["red","sweet","baked","fancy"],
+    "unlock": {"building": "kitchen", "level": 0},
+    "color": "#C21E3A",
+    "requires": "heirloom:hillside_orchard"
+  },
+  {
+    "id": "honey_cake",
+    "name": "Honey Cake",
+    "inputs": [
+      {"id": "honey", "qty": 2},
+      {"id": "flour", "qty": 2},
+      {"id": "egg", "qty": 1}
+    ],
+    "craftMin": 45,
+    "xp": 16,
+    "tags": ["yellow","sweet","baked","dessert"],
+    "unlock": {"building": "kitchen", "level": 0},
+    "color": "#F2B33D",
+    "requires": "heirloom:beekeeping"
+  }
+]

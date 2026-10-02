@@ -1,0 +1,272 @@
+[
+  {
+    "id": "q_welcome",
+    "chapter": 1,
+    "title": "Clear the Brambles",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "The garden is buried in blackberry brambles. Tap a bramble patch by the farmhouse to clear it.",
+    "prereq": [],
+    "objective": {"type": "stat", "stat": "clearPlot", "count": 1},
+    "reward": {"coins": 20, "xp": 5},
+    "hint": "Tap a tangled plot in the Homestead garden."
+  },
+  {
+    "id": "q_first_plant",
+    "chapter": 1,
+    "title": "Seeds in the Ground",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "Plant three seeds. Short crops are perfect while you are getting started.",
+    "prereq": ["q_welcome"],
+    "objective": {"type": "stat", "stat": "plant", "count": 3},
+    "reward": {"coins": 15, "xp": 5},
+    "hint": "Tap an empty plot, then pick a seed."
+  },
+  {
+    "id": "q_tend",
+    "chapter": 1,
+    "title": "A Little Love",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "Tap a growing crop to tend it. Watering shaves a bit of time off.",
+    "prereq": ["q_first_plant"],
+    "objective": {"type": "stat", "stat": "tend", "count": 3},
+    "reward": {"coins": 10, "xp": 5}
+  },
+  {
+    "id": "q_first_harvest",
+    "chapter": 1,
+    "title": "First Harvest",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "Harvest three crops. Tap and drag across ready plots to sweep them up.",
+    "prereq": ["q_tend"],
+    "objective": {"type": "stat", "stat": "harvest", "count": 3},
+    "reward": {"coins": 40, "xp": 10}
+  },
+  {
+    "id": "q_farmhouse",
+    "chapter": 1,
+    "title": "A Roof Over Our Heads",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "Patch up the farmhouse. Andrew sells lumber; the Repair button buys what you are missing.",
+    "prereq": ["q_first_harvest"],
+    "objective": {"type": "building", "id": "farmhouse", "stage": 2},
+    "reward": {"coins": 100, "xp": 15}
+  },
+  {
+    "id": "q_claire_first",
+    "chapter": 1,
+    "title": "Claire's First Order",
+    "giver": "claire",
+    "tutorial": true,
+    "text": "Claire runs the cafe in town and she has opinions about produce. Fill one of her orders.",
+    "prereq": ["q_farmhouse"],
+    "objective": {"type": "stat", "stat": "orderFill", "count": 1},
+    "reward": {"coins": 100, "xp": 15}
+  },
+  {
+    "id": "q_coop_clear",
+    "chapter": 1,
+    "title": "Path to the Coop",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "Clear the brush around the old coop.",
+    "prereq": ["q_claire_first"],
+    "objective": {"type": "parcel", "id": "coop_orchard", "state": "cleared"},
+    "reward": {"coins": 50, "xp": 10}
+  },
+  {
+    "id": "q_coop",
+    "chapter": 1,
+    "title": "Home to Roost",
+    "giver": "luke",
+    "tutorial": true,
+    "text": "Fix up the coop so the hens have somewhere to live.",
+    "prereq": ["q_coop_clear"],
+    "objective": {"type": "building", "id": "coop", "stage": 2},
+    "reward": {"coins": 40, "xp": 20, "animals": [{"kind": "hen", "qty": 2},{"kind": "rooster", "qty": 1}]}
+  },
+  {"id": "q_eggs", "chapter": 1, "title": "Breakfast Is Served", "giver": "luke", "text": "Collect three eggs from the hens.", "prereq": ["q_coop"], "objective": {"type": "stat", "stat": "collect", "id": "egg", "count": 3}, "reward": {"coins": 60, "xp": 10, "cosmetics": ["hat_straw"]}},
+  {"id": "q_barn_clear", "chapter": 2, "title": "Into the Pasture", "giver": "luke", "text": "Clear the overgrown pasture by the barn.", "prereq": ["q_eggs"], "objective": {"type": "parcel", "id": "barn_pasture", "state": "cleared"}, "reward": {"coins": 120, "xp": 20}},
+  {
+    "id": "q_barn",
+    "chapter": 2,
+    "title": "Barn Raising",
+    "giver": "andrew",
+    "text": "Repair the big red barn. A Highland cow is waiting for a home.",
+    "prereq": ["q_barn_clear"],
+    "objective": {"type": "building", "id": "barn", "stage": 2},
+    "reward": {"coins": 100, "xp": 40, "animals": [{"kind": "highland_cow", "qty": 1}]}
+  },
+  {"id": "q_milk", "chapter": 2, "title": "Moo Juice", "giver": "luke", "text": "Collect two pails of milk.", "prereq": ["q_barn"], "objective": {"type": "stat", "stat": "collect", "id": "milk", "count": 2}, "reward": {"coins": 150, "xp": 20}},
+  {
+    "id": "q_brush",
+    "chapter": 2,
+    "title": "Good Hair Day",
+    "giver": "luke",
+    "text": "Brush a cow three times. Highland cows love a good brushing (and the bangs need it).",
+    "prereq": ["q_milk"],
+    "objective": {"type": "stat", "stat": "brush", "count": 3},
+    "reward": {"xp": 20, "cosmetics": ["neck_bow_purple"]}
+  },
+  {
+    "id": "q_roadside",
+    "chapter": 2,
+    "title": "Open for Business",
+    "giver": "claire",
+    "text": "Clear the roadside so Claire's delivery van can get in.",
+    "prereq": ["q_barn_clear"],
+    "objective": {"type": "parcel", "id": "roadside", "state": "cleared"},
+    "reward": {"coins": 200, "xp": 20}
+  },
+  {
+    "id": "q_honor",
+    "chapter": 2,
+    "title": "The Honor Box",
+    "giver": "luke",
+    "text": "Fix the honor box stand. Neighbors leave coins for flowers, even while you sleep.",
+    "prereq": ["q_roadside"],
+    "objective": {"type": "building", "id": "honor_box", "stage": 2},
+    "reward": {"coins": 100, "xp": 20}
+  },
+  {"id": "q_kitchen", "chapter": 2, "title": "Something Smells Good", "giver": "claire", "text": "Restore the summer kitchen so you can cook with what you grow.", "prereq": ["q_milk"], "objective": {"type": "building", "id": "kitchen", "stage": 2}, "reward": {"coins": 300, "xp": 50}},
+  {
+    "id": "q_craft_butter",
+    "chapter": 2,
+    "title": "Churn, Baby, Churn",
+    "giver": "claire",
+    "text": "Churn two batches of butter.",
+    "prereq": ["q_kitchen"],
+    "objective": {"type": "stat", "stat": "craft", "id": "butter", "count": 2},
+    "reward": {"coins": 200, "xp": 20, "cosmetics": ["av_acc_basket"]}
+  },
+  {
+    "id": "q_stall",
+    "chapter": 2,
+    "title": "Market Stall",
+    "giver": "andrew",
+    "text": "Rebuild the market stall. The Farmers Market runs every Saturday and Sunday.",
+    "prereq": ["q_roadside"],
+    "objective": {"type": "building", "id": "market_stall", "stage": 2},
+    "reward": {"coins": 300, "xp": 40}
+  },
+  {
+    "id": "q_market_first",
+    "chapter": 2,
+    "title": "Market Day",
+    "giver": "luke",
+    "text": "Sell five items at the Farmers Market this weekend. Check the hints to see what is hot.",
+    "prereq": ["q_stall"],
+    "objective": {"type": "stat", "stat": "marketSell", "count": 5},
+    "reward": {"ribbons": 3, "xp": 40}
+  },
+  {
+    "id": "q_homestead_restore",
+    "chapter": 3,
+    "title": "Picket Fences",
+    "giver": "luke",
+    "text": "Fully restore the Homestead parcel with fences and fresh paint.",
+    "prereq": ["q_kitchen"],
+    "objective": {"type": "parcel", "id": "homestead", "state": "restored"},
+    "reward": {"xp": 60, "decor": ["selleck_sign"]}
+  },
+  {
+    "id": "q_claire_flowers",
+    "chapter": 3,
+    "title": "Flowers for the Tables",
+    "giver": "claire",
+    "text": "Fill ten of Claire's orders. She wants fresh flowers for the cafe tables next.",
+    "prereq": ["q_claire_first"],
+    "objective": {"type": "stat", "stat": "orderFill", "count": 10},
+    "reward": {"coins": 400, "xp": 60, "recipes": ["tulip_bouquet", "sunflower_bouquet"]}
+  },
+  {"id": "q_north", "chapter": 3, "title": "North Field", "giver": "luke", "text": "Clear the North Field. Long crops love it up there.", "prereq": ["q_homestead_restore"], "objective": {"type": "parcel", "id": "north_field", "state": "cleared"}, "reward": {"coins": 500, "xp": 60}},
+  {"id": "q_vineyard", "chapter": 3, "title": "Grandpa's Vines", "giver": "luke", "text": "Clear the vineyard and berry rows.", "prereq": ["q_north"], "objective": {"type": "parcel", "id": "vineyard", "state": "cleared"}, "reward": {"coins": 800, "xp": 80}},
+  {
+    "id": "q_winery",
+    "chapter": 3,
+    "title": "The Old Winery",
+    "giver": "claire",
+    "text": "Restore the old winery. Claire is already planning the pairing menu.",
+    "prereq": ["q_vineyard"],
+    "objective": {"type": "building", "id": "winery", "stage": 2},
+    "reward": {"xp": 120, "items": [{"id": "barrel", "qty": 1}], "cosmetics": ["label_vine"]}
+  },
+  {
+    "id": "q_first_wine",
+    "chapter": 3,
+    "title": "First Vintage",
+    "giver": "claire",
+    "text": "Ferment and bottle your first wine. Name it something good.",
+    "prereq": ["q_winery"],
+    "objective": {"type": "stat", "stat": "wineBottle", "count": 1},
+    "reward": {"ribbons": 5, "xp": 100, "decor": ["grape_arbor"]}
+  },
+  {
+    "id": "q_luna_bed",
+    "chapter": 4,
+    "title": "Her Majesty",
+    "giver": "luna",
+    "text": "Luna would like to be acknowledged. Tap her ten times. She will not thank you.",
+    "prereq": ["q_coop"],
+    "objective": {"type": "stat", "stat": "lunaTap", "count": 10},
+    "reward": {"decor": ["luna_bed"], "xp": 10}
+  },
+  {
+    "id": "q_andrew_wreaths",
+    "chapter": 4,
+    "title": "Andrew's Regular",
+    "giver": "andrew",
+    "text": "Buy thirty materials from Andrew's General Store. He might share his wreath trick.",
+    "prereq": ["q_farmhouse"],
+    "objective": {"type": "stat", "stat": "buy", "count": 30},
+    "reward": {"coins": 150, "xp": 30, "recipes": ["holiday_wreath"]}
+  },
+  {
+    "id": "q_greenhouse",
+    "chapter": 4,
+    "title": "Glass House",
+    "giver": "andrew",
+    "text": "Restore the greenhouse in the North Field to grow a crop out of season.",
+    "prereq": ["q_north"],
+    "objective": {"type": "building", "id": "greenhouse", "stage": 2},
+    "reward": {"coins": 2000, "xp": 120}
+  },
+  {
+    "id": "q_five_parcels",
+    "chapter": 4,
+    "title": "Halfway Home",
+    "giver": "luke",
+    "text": "Fully restore five of the nine parcels.",
+    "prereq": ["q_homestead_restore"],
+    "objective": {"type": "parcelsRestored", "count": 5},
+    "reward": {"ribbons": 10, "xp": 300, "decor": ["wooden_bench"]}
+  },
+  {"id": "q_kitchen_5", "chapter": 4, "title": "Head Chef", "giver": "claire", "text": "Upgrade the kitchen to level 5.", "prereq": ["q_craft_butter"], "objective": {"type": "building", "id": "kitchen", "level": 5}, "reward": {"coins": 3000, "xp": 150}},
+  {
+    "id": "q_cellar_reserve",
+    "chapter": 4,
+    "title": "Patience Pays",
+    "giver": "claire",
+    "text": "Let a batch age until it becomes a Reserve, then bottle it.",
+    "prereq": ["q_first_wine"],
+    "objective": {"type": "stat", "stat": "wineReserve", "count": 1},
+    "reward": {"ribbons": 8, "xp": 150}
+  },
+  {"id": "q_south", "chapter": 5, "title": "The Big Field", "giver": "luke", "text": "Clear the South Field.", "prereq": ["q_vineyard"], "objective": {"type": "parcel", "id": "south_field", "state": "cleared"}, "reward": {"coins": 4000, "xp": 200}},
+  {"id": "q_creek", "chapter": 5, "title": "Down by the Creek", "giver": "luke", "text": "Clear the Creek Bottom.", "prereq": ["q_south"], "objective": {"type": "parcel", "id": "creek_bottom", "state": "cleared"}, "reward": {"coins": 15000, "xp": 300}},
+  {"id": "q_woods", "chapter": 5, "title": "Selleck Woods", "giver": "luke", "text": "Clear a path into Selleck Woods.", "prereq": ["q_creek"], "objective": {"type": "parcel", "id": "selleck_woods", "state": "cleared"}, "reward": {"coins": 50000, "xp": 500}},
+  {
+    "id": "q_all_restored",
+    "chapter": 5,
+    "title": "All Nine Acres",
+    "giver": "luke",
+    "text": "Restore every parcel. The whole farm, back the way it should be.",
+    "prereq": ["q_five_parcels"],
+    "objective": {"type": "parcelsRestored", "count": 9},
+    "reward": {"ribbons": 25, "xp": 1000}
+  }
+]

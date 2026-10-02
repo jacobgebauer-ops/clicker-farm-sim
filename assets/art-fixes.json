@@ -1,0 +1,28 @@
+{
+  "_comment": "Cleanup applied by npm run art:process. fillHoles: largest enclosed see-through region (in source pixels) to fill, per manifest id; a trailing * matches a prefix and an exact id wins. Use an object to repaint with a known color (color, plus shade along the outline) when the original color was keyed out, and rows [y0, y1] to fill between the outline on those rows when the outline itself is broken. List only sprites whose holes are damage, not real gaps. skip: ids art:process leaves alone, with the reason.",
+  "fillHoles": {
+    "prop_van": 400,
+    "prop_mailbox": 60,
+    "ui_basket": 40,
+    "anim_rooster": 120,
+    "bld_county_fair_restored": 60,
+    "bld_hive_restored": 200,
+    "bld_kitchen_restored": 10,
+    "bld_winery_restored": 30,
+    "char_claire": { "max": 40, "rows": [31, 65], "color": "#E77287", "shade": "#B74769" },
+    "cos_hat_flower_crown": { "max": 250, "color": "#FFB7D5", "shade": "#E77287" },
+    "decor_christmas_tree": { "max": 60, "color": "#E5384F", "shade": "#B33A3A" },
+    "decor_candy_egg_tree": { "max": 30, "color": "#FFB7D5", "shade": "#E77287" },
+    "item_wine_blackberry": { "max": 80, "color": "#7A1F3D", "shade": "#4A1028" },
+    "ui_claires_cafe": { "max": 100, "color": "#FF8FAB", "shade": "#E5687F" },
+    "bld_farmhouse_restored": 60,
+    "crop_apple": { "max": 45, "color": "#E5384F", "shade": "#B33A3A" },
+    "prop_tree_apple": { "max": 45, "color": "#E5384F", "shade": "#B33A3A" },
+    "char_*": 40,
+    "portrait_*": 10,
+    "crop_*": 40
+  },
+  "skip": {
+    "tile_fence_v": "the supplied piece is a side-on fence; until a top-down vertical piece exists the game builds one from tile_fence_h"
+  }
+}

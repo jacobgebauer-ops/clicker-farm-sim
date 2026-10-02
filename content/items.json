@@ -1,0 +1,14 @@
+[
+  {"id": "milk", "name": "Highland Milk", "kind": "animal", "basePrice": 45, "tags": ["white", "dairy", "animal"], "color": "#FFF6DD"},
+  {"id": "egg", "name": "Farm Egg", "kind": "animal", "basePrice": 9, "tags": ["white", "animal", "breakfast"], "color": "#F5E6C8"},
+  {"id": "honey", "name": "Woods Honey", "kind": "animal", "basePrice": 40, "tags": ["yellow", "sweet", "animal"], "color": "#F2B33D", "requires": "heirloom:beekeeping"},
+  {"id": "lumber", "name": "Lumber", "kind": "material", "basePrice": 6, "buyable": true, "tags": ["material"], "color": "#B07A4A"},
+  {"id": "nails", "name": "Nails", "kind": "material", "basePrice": 3, "buyable": true, "tags": ["material"], "color": "#9AA3AD"},
+  {"id": "paint", "name": "Paint", "kind": "material", "basePrice": 12, "buyable": true, "tags": ["material"], "color": "#7B4FB5"},
+  {"id": "glass", "name": "Glass Pane", "kind": "material", "basePrice": 15, "buyable": true, "tags": ["material"], "color": "#BFE8FF"},
+  {"id": "fencing", "name": "Fencing", "kind": "material", "basePrice": 10, "buyable": true, "tags": ["material"], "color": "#C9A27A"},
+  {"id": "barrel", "name": "Oak Barrel", "kind": "material", "basePrice": 60, "buyable": true, "tags": ["material", "winery"], "color": "#8A5A34"},
+  {"id": "bottle", "name": "Wine Bottle", "kind": "material", "basePrice": 4, "buyable": true, "tags": ["material", "winery"], "color": "#4A2B7A"},
+  {"id": "sugar", "name": "Sugar", "kind": "material", "basePrice": 3, "buyable": true, "tags": ["material", "pantry"], "color": "#FFFFFF"},
+  {"id": "flour", "name": "Flour", "kind": "material", "basePrice": 3, "buyable": true, "tags": ["material", "pantry"], "color": "#F4EBD9"}
+]

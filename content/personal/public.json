@@ -1,0 +1,10 @@
+{
+  "playerName": "Farmer",
+  "farmName": "Willow Creek Homestead",
+  "townName": "Willow Creek",
+  "cows": ["Fergus", "Moira", "Bonnie", "Angus", "Heather", "Wallace"],
+  "chickens": ["Henrietta", "Clucky", "Pepper", "Biscuit", "Nugget", "Mabel"],
+  "dedication": "Welcome to the farm. Make yourself at home.",
+  "easterEggs": [],
+  "familyWine": null
+}

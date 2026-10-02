@@ -1,0 +1,14 @@
+{
+  "playerName": "Rachel",
+  "farmName": "Selleck Homestead",
+  "townName": "Selleck",
+  "husbandName": "your husband",
+  "cows": ["Fergus", "Moira", "Bonnie", "Angus", "Heather", "Wallace"],
+  "chickens": ["Henrietta", "Clucky", "Pepper", "Biscuit", "Nugget", "Mabel"],
+  "dedication": "Rachel,\n\nYou grew up on nine acres in Selleck with Highland cows, chickens, and homemade fruit wine. I can't give you the farm back (yet), so I built you this one.\n\nClear the brambles, name the cows, and put a hat on every single one of them.\n\nI love you.\n\nYour husband",
+  "easterEggs": [
+    {"trigger": "decorTap:highland_statue:5", "text": "Fergus approves of this statue. Fergus approves of very few things."},
+    {"trigger": "lunaTap:100", "text": "Luna has accepted you as her human. This is the highest honor available."}
+  ],
+  "familyWine": {"name": "Selleck Family Blackberry", "description": "The family recipe, the way it was always made. Some things you don't change.", "label": "#4A2B7A", "fruit": "blackberry"}
+}
