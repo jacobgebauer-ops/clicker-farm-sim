@@ -447,8 +447,10 @@ function drawProp(c, id) {
   const H = c.h;
   const draw = {
     prop_well: () => { c.rect(4, 22, 24, 16, hex('#9AA3AD')); c.rect(4, 22, 24, 3, hex('#BDB6AA')); c.rect(6, 4, 3, 20, hex('#8A5A34')); c.rect(23, 4, 3, 20, hex('#8A5A34')); c.tri(2, 6, 16, -2, 30, 6, hex('#7B4FB5')); },
-    prop_tree: () => { c.rect(14, 30, 5, 18, hex('#8A5A34')); c.circle(16, 18, 13, hex('#4FA36A')); c.circle(12, 14, 5, hex('#6BC266')); },
-    prop_fir: () => { c.rect(14, 46, 4, 10, hex('#6E4A32')); c.tri(16, 0, 2, 48, 30, 48, hex('#1F6B45')); c.tri(16, 0, 9, 24, 23, 24, hex('#2E8B57')); },
+    prop_tree: () => { c.rect(W / 2 - 3, H * 0.55, 6, H * 0.45, hex('#8A5A34')); c.circle(W / 2, H * 0.4, W * 0.42, hex('#E3842B')); c.circle(W * 0.38, H * 0.32, W * 0.15, hex('#F2A33D')); },
+    prop_tree_apple: () => { c.rect(W / 2 - 3, H * 0.55, 6, H * 0.45, hex('#8A5A34')); c.circle(W / 2, H * 0.4, W * 0.42, hex('#4FA36A')); for (const [dx, dy] of [[-8, -6], [6, -10], [0, 4], [10, 2], [-10, 6]]) c.circle(W / 2 + dx, H * 0.4 + dy, 2.5, hex('#E5384F')); },
+    prop_fir: () => { c.rect(W / 2 - 2, H - 12, 4, 12, hex('#6E4A32')); c.tri(W / 2, 0, 2, H - 10, W - 2, H - 10, hex('#1F6B45')); c.tri(W / 2, 0, W * 0.25, H * 0.45, W * 0.75, H * 0.45, hex('#2E8B57')); },
+    prop_brambles: () => { const r = noise(7); for (let i = 0; i < 9; i++) { const x = 6 + r() * (W - 12); const y = 8 + r() * (H - 14); c.circle(x, y, 5 + r() * 3, hex('#2E5A2A')); c.set(x + 2, y - 1, hex('#3B1F4F')); } },
     prop_bush: () => { c.circle(16, 20, 11, hex('#4FA36A')); c.circle(11, 16, 4, hex('#6BC266')); },
     prop_rock: () => { c.ellipse(16, 15, 13, 8, hex('#9AA3AD')); c.ellipse(12, 12, 5, 2, hex('#C7D0D8')); },
     prop_mailbox: () => { c.rect(7, 14, 2, 18, hex('#8A5A34')); c.rect(2, 6, 12, 9, hex('#7B4FB5')); c.rect(13, 4, 2, 5, hex('#E5384F')); },

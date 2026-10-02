@@ -361,7 +361,7 @@ export function updateAnimal(s: GameState, a: AnimalState, now: number) {
     a.kind = def.growsInto;
     a.growsAt = undefined;
     a.prodAt = now;
-    emit({ type: 'toast', text: `${a.name} grew up into a fine hen!`, icon: 'egg' });
+    emit({ type: 'toast', text: `${a.name} is all grown up into a fine ${C().animals.get(a.kind)?.name.toLowerCase() ?? 'animal'}!`, icon: 'heart' });
     return;
   }
   if (!def.product) return;

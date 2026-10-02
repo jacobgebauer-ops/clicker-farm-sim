@@ -1,5 +1,5 @@
 import type { ComponentChildren, JSX } from 'preact';
-import { entry, assetUrl } from '../game/assets';
+import { entry, assetUrl, hasRealArt, hasFrameArt, realFrameCount } from '../game/assets';
 import * as G from '../core';
 import { store } from './store';
 import { sfx } from '../audio/audio';
@@ -27,6 +27,17 @@ export function Sprite({ id, frame = 0, scale = 1, class: cls, title, tint }: { 
     backgroundSize: `${cw * frames}px ${ch}px`,
     backgroundPosition: `${-cw * Math.min(frame, frames - 1)}px 0`,
   };
+  if (hasFrameArt(id, frame)) {
+    // final art for just this frame, fitted inside the slot box
+    style.backgroundImage = `url(${assetUrl(id, frame)})`;
+    style.backgroundSize = 'contain';
+    style.backgroundPosition = 'center bottom';
+  } else if (hasRealArt(id)) {
+    // final art keeps its own resolution and is fitted inside the slot box
+    const rf = realFrameCount(id);
+    style.backgroundSize = rf > 1 ? `${rf * 100}% 100%` : 'contain';
+    style.backgroundPosition = rf > 1 ? `${(Math.min(frame, rf - 1) / (rf - 1)) * 100}% 0` : 'center bottom';
+  }
   if (tint) {
     // grayscale layer tinted with multiply, masked to the sprite's shape so shading survives
     const mask = `url(${assetUrl(id)})`;

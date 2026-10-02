@@ -43,7 +43,7 @@ export function buildManifest() {
 
   // animals (2-frame idle strips)
   for (const a of animals) {
-    const size = a.kind === 'cow' ? [48, 40] : a.id === 'chick' ? [16, 16] : [24, 24];
+    const size = a.id === 'highland_calf' ? [36, 30] : a.kind === 'cow' ? [48, 40] : a.id === 'chick' ? [16, 16] : [24, 24];
     add('animals', `anim_${a.id}`, size[0], size[1], { frames: 2, headAnchor: a.headAnchor, hornSpan: a.hornSpan });
   }
   add('animals', 'luna_sleep', 32, 24, { frames: 2 });
@@ -74,7 +74,7 @@ export function buildManifest() {
   for (const d of decor) add('decor', `decor_${d.id}`, d.w * 32, d.h * 32, { anchor: [0, 1], footprint: [d.w, d.h], frames: d.animated ? 2 : 1, color: d.color });
 
   // farm props and lucky critters
-  for (const [id, w, h] of [['prop_well', 32, 40], ['prop_tree', 32, 48], ['prop_fir', 32, 56], ['prop_bush', 32, 32], ['prop_rock', 32, 24], ['prop_mailbox', 16, 32], ['prop_van', 64, 40], ['prop_sign', 32, 32], ['prop_stump', 32, 24], ['prop_haystack', 32, 32], ['prop_lamp', 16, 48]]) add('props', id, w, h);
+  for (const [id, w, h] of [['prop_well', 32, 40], ['prop_tree', 56, 72], ['prop_tree_apple', 52, 64], ['prop_fir', 44, 80], ['prop_brambles', 40, 38], ['prop_bush', 32, 32], ['prop_rock', 32, 24], ['prop_mailbox', 16, 32], ['prop_van', 64, 40], ['prop_sign', 32, 32], ['prop_stump', 32, 24], ['prop_haystack', 32, 32], ['prop_lamp', 16, 48]]) add('props', id, w, h);
   add('fx', 'lucky_butterfly', 16, 16, { frames: 2, anchor: [0.5, 0.5] });
   add('fx', 'lucky_blue_butterfly', 16, 16, { frames: 2, anchor: [0.5, 0.5] });
   add('fx', 'lucky_ladybug', 12, 12, { frames: 2, anchor: [0.5, 0.5] });
@@ -84,9 +84,14 @@ export function buildManifest() {
   for (const [id, w, h] of [['mg_pail', 40, 32], ['mg_note', 24, 24], ['mg_note_gold', 24, 24], ['mg_basket', 48, 32], ['mg_egg', 16, 20], ['mg_egg_gold', 16, 20], ['mg_boot', 24, 24], ['mg_feather', 16, 16], ['mg_weed', 24, 24], ['mg_weed_big', 32, 32], ['mg_sprout', 24, 24], ['mg_bg_barn', 360, 640], ['mg_bg_coop', 360, 640], ['mg_bg_field', 360, 640]]) add('minigames', id, w, h, { anchor: [0.5, 0.5] });
 
   // ui
+  add('ui', 'ui_claires_cafe', 112, 112, { anchor: [0.5, 1] });
   for (const id of ['coin', 'ribbon', 'heirloom_seed', 'star', 'star_empty', 'heart', 'xp', 'clock', 'lock', 'check', 'luke_button', 'collect_all', 'tab_farm', 'tab_craft', 'tab_shops', 'tab_style', 'tab_menu', 'basket', 'almanac', 'journal', 'chalkboard'])
     add('ui', `ui_${id}`, 32, 32, { anchor: [0.5, 0.5] });
 
+  // placement data for final art (head anchors, facing), kept beside the manifest
+  const metaFile = path.join(root, 'assets/art-meta.json');
+  const meta = fs.existsSync(metaFile) ? JSON.parse(fs.readFileSync(metaFile, 'utf8')) : {};
+  for (const e of out) if (meta[e.id]) e.art = meta[e.id];
   return out;
 }
 

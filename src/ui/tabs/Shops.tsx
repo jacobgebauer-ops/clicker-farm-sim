@@ -5,6 +5,7 @@ import { nav } from '../nav';
 import { useStore, useNow } from '../hooks';
 import { Btn, Coins, ItemIcon, Progress, Row, Sprite, Tabs, Empty, Portrait, Ribbons } from '../components';
 import { useState } from 'preact/hooks';
+import { hasRealArt } from '../../game/assets';
 
 export function ShopsTab() {
   const s = useStore();
@@ -36,6 +37,11 @@ function Claire() {
   const chalk = G.hintsFor(s, now, 'claire');
   return (
     <div>
+      {hasRealArt('ui_claires_cafe') ? (
+        <div class="cafe-hero">
+          <Sprite id="ui_claires_cafe" scale={1.25} title="Claire's Cafe" />
+        </div>
+      ) : null}
       <div class="namecard">
         <Portrait who="claire" />
         <div class="grow">

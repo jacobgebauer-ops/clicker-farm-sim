@@ -11,6 +11,8 @@ Every asset in the game, where it came from, the tool used, its license, and the
 | Procedural music box | generated at runtime | `src/audio/audio.ts` | Code | Project's own | 2026-10-02 |
 | Game engine | npm | Phaser 3 | n/a | MIT | 2026-10-02 |
 | UI library | npm | Preact | n/a | MIT | 2026-10-02 |
+| Final sprites, first batch (32 images: barn, coop, farmhouse, greenhouse, Claire's cafe, Highland cow and calf, hen, chick, Luke, Luna, pumpkin, strawberry, lavender, apple, maple and fir trees, brambles, well, wooden fence, beach umbrella, giant candy corn, Luna's bed, Christmas tree, candy egg tree, four hats, blackberry jam, milk, blackberry wine) | `public/assets/**` (mapping in `assets/grok-map.json`) | AI generated in a Grok workspace, supplied by the project owner | Grok image generation, then `npm run art:process -- --native --map assets/grok-map.json` | Owner-generated; check xAI's terms for generated images before any public release | 2026-10-02 |
+| Luke and Luna portraits | `public/assets/portraits/*.png` | Cropped from the Luke and Luna sprites above | `art:process` crop | Same as above | 2026-10-02 |
 
 ## Template
 

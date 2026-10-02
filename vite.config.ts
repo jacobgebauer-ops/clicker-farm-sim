@@ -15,9 +15,30 @@ const base = process.env.BASE_PATH || '/';
 function assetIndex(): Plugin {
   const id = 'virtual:asset-index';
   const resolved = '\0' + id;
+  const pngSize = (file: string): [number, number] => {
+    const b = fs.readFileSync(file);
+    return [b.readUInt32BE(16), b.readUInt32BE(20)];
+  };
   const scan = () => {
-    const manifest = JSON.parse(fs.readFileSync('assets/manifest.json', 'utf8')) as { id: string; path: string }[];
-    return manifest.filter((e) => fs.existsSync(path.join('public', e.path))).map((e) => e.id);
+    const manifest = JSON.parse(fs.readFileSync('assets/manifest.json', 'utf8')) as { id: string; path: string; frames: number }[];
+    const ids: string[] = [];
+    const frames: Record<string, number[]> = {};
+    const sizes: Record<string, [number, number]> = {};
+    for (const e of manifest) {
+      const file = path.join('public', e.path);
+      if (fs.existsSync(file)) {
+        ids.push(e.id);
+        sizes[e.id] = pngSize(file);
+      }
+      for (let f = 0; f < Math.max(4, e.frames); f++) {
+        const ff = file.replace(/\.png$/, `_f${f}.png`);
+        if (fs.existsSync(ff)) {
+          (frames[e.id] ??= []).push(f);
+          sizes[`${e.id}#f${f}`] = pngSize(ff);
+        }
+      }
+    }
+    return { ids, frames, sizes };
   };
   return {
     name: 'asset-index',

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { MANIFEST, assetUrl } from './assets';
+import { MANIFEST, assetUrl, hasRealArt, realFrameCount, realSize, frameOverrides, frameKey } from './assets';
 
 /** Loads every art slot. Missing files never crash: they become generated blocks. */
 export class BootScene extends Phaser.Scene {
@@ -12,9 +12,17 @@ export class BootScene extends Phaser.Scene {
     this.load.on('loaderror', (file: Phaser.Loader.File) => failed.add(file.key));
     for (const e of MANIFEST) {
       const url = assetUrl(e.id);
-      if (e.frames > 1) this.load.spritesheet(e.id, url, { frameWidth: e.w, frameHeight: e.h });
+      if (hasRealArt(e.id)) {
+        // final art keeps its own resolution; it is a strip only if its shape says so
+        const frames = realFrameCount(e.id);
+        const [w, h] = realSize(e.id)!;
+        if (frames > 1) this.load.spritesheet(e.id, url, { frameWidth: Math.floor(w / frames), frameHeight: h });
+        else this.load.image(e.id, url);
+      } else if (e.frames > 1) this.load.spritesheet(e.id, url, { frameWidth: e.w, frameHeight: e.h });
       else this.load.image(e.id, url);
     }
+    // per-frame final art (for example a crop's ready stage)
+    for (const o of frameOverrides()) this.load.image(frameKey(o.id, o.frame), assetUrl(o.id, o.frame));
     this.load.once('complete', () => {
       for (const e of MANIFEST) if (failed.has(e.id) || !this.textures.exists(e.id)) this.makeFallback(e.id, e.w * e.frames, e.h, e.frames, e.w, e.color);
     });
@@ -43,7 +51,7 @@ export class BootScene extends Phaser.Scene {
   create() {
     // two-frame idle animations for anything with frames
     for (const e of MANIFEST) {
-      if (e.frames > 1 && !e.id.startsWith('crop_')) {
+      if (e.frames > 1 && !e.id.startsWith('crop_') && this.textures.get(e.id).frameTotal > 2) {
         this.anims.create({ key: `${e.id}_idle`, frames: this.anims.generateFrameNumbers(e.id, { start: 0, end: e.frames - 1 }), frameRate: e.frames > 2 ? 6 : 2, repeat: -1 });
       }
     }

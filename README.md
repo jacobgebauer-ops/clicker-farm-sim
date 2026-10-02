@@ -96,7 +96,15 @@ There is also an "Add to Home Screen" button and the same steps in Menu, Setting
 
 Every art slot is listed in `assets/manifest.json` with its id, path, size, frame count, and anchors. The game loads `public/<path>` when it exists and falls back to the generated placeholder otherwise; a missing file never crashes anything.
 
-To ingest AI-generated art (solid magenta `#FF00FF` background), name each file after its manifest id and run:
+The first batch of final art (32 sprites from the Grok workspace) is already in. It was ingested at its own resolution with a rename map:
+
+```bash
+npm run art:process -- art-inbox/grok --native --map assets/grok-map.json
+```
+
+`--native` keeps the source resolution (the game fits art to each slot when drawing it), and the map renames sources to manifest ids, targets single frames (`"frame": 3` for a crop's ready stage), and can crop (the Luke and Luna portraits). Placement data for animal art (head anchor for hats, horn span, facing) is in `assets/art-meta.json`.
+
+To ingest AI-generated art (solid magenta `#FF00FF` background, or already transparent), name each file after its manifest id and run:
 
 ```bash
 npm run art:process -- path/to/inbox            # writes into public/assets/...

@@ -1,0 +1,9 @@
+{
+  "_comment": "Placement data for final art, in the final art's own pixels. Used only when the real file exists. facing: which way the art faces (the game flips it while walking).",
+  "anim_highland_cow": { "headAnchor": [34, 14], "hornSpan": 40, "facing": "left" },
+  "anim_highland_calf": { "headAnchor": [21, 6], "hornSpan": 30, "facing": "left" },
+  "anim_hen": { "headAnchor": [9, 38], "facing": "left" },
+  "anim_chick": { "headAnchor": [24, 4], "facing": "right" },
+  "char_luke": { "facing": "right" },
+  "luna_sit": { "facing": "left" }
+}

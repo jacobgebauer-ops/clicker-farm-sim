@@ -3,7 +3,7 @@ import * as G from '../core';
 import type { GameState, Plot, AnimalState } from '../core';
 import { store } from '../ui/store';
 import { nav } from '../ui/nav';
-import { entry } from './assets';
+import { displayScale, hasRealArt, hasFrameArt, frameKey, artMeta } from './assets';
 import { sfx } from '../audio/audio';
 import { webPlatform } from '../platform/web';
 
@@ -58,11 +58,13 @@ export class FarmScene extends Phaser.Scene {
   private ground!: Phaser.GameObjects.RenderTexture;
   private groundKey = '';
   private plots = new Map<string, { soil: Phaser.GameObjects.Image; crop?: Phaser.GameObjects.Sprite; cropId?: string; stage: number; ready: boolean }>();
-  private buildings = new Map<string, { sprite: Phaser.GameObjects.Sprite; key: string; roof: Phaser.GameObjects.Graphics; bar: Phaser.GameObjects.Graphics; bubble: Phaser.GameObjects.Image }>();
+  private buildings = new Map<string, { sprite: Phaser.GameObjects.Sprite; key: string; roof: Phaser.GameObjects.Graphics; bar: Phaser.GameObjects.Graphics; bubble: Phaser.GameObjects.Image; extras: Phaser.GameObjects.Image[] }>();
   private animals = new Map<string, AnimalView>();
   private decor = new Map<string, Phaser.GameObjects.Sprite>();
   private props: Phaser.GameObjects.GameObject[] = [];
   private seasonProps: Phaser.GameObjects.Image[] = [];
+  private scenery: Phaser.GameObjects.Image[] = [];
+  private sceneryKey = '';
   private luna!: Phaser.GameObjects.Sprite;
   private luke!: Phaser.GameObjects.Sprite;
   private avatar!: Phaser.GameObjects.Container;
@@ -92,6 +94,27 @@ export class FarmScene extends Phaser.Scene {
     super('Farm');
   }
 
+  /** Scale a sprite so final art of any resolution fills its slot; remembers the base scale. */
+  private fit<O extends Phaser.GameObjects.Image | Phaser.GameObjects.Sprite>(obj: O, id: string, frame?: number, mult = 1): O {
+    const sc = displayScale(id, frame) * mult;
+    obj.setScale(sc);
+    obj.setData('base', sc);
+    return obj;
+  }
+
+  private base(obj: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite): number {
+    return (obj.getData('base') as number) ?? 1;
+  }
+
+  /** Play the idle strip if the art has one; otherwise a gentle code animation keeps it alive. */
+  private idle(obj: Phaser.GameObjects.Sprite, key: string, reduceMotion: boolean) {
+    if (this.anims.exists(`${key}_idle`)) obj.play(`${key}_idle`);
+    else if (!reduceMotion) {
+      const b = this.base(obj);
+      this.tweens.add({ targets: obj, scaleY: b * 1.035, yoyo: true, repeat: -1, duration: 900 + Math.random() * 500, ease: 'Sine.easeInOut', delay: Math.random() * 600 });
+    }
+  }
+
   create() {
     const cam = this.cameras.main;
     cam.setBackgroundColor('#4F7A4A');
@@ -105,13 +128,18 @@ export class FarmScene extends Phaser.Scene {
     cam.centerOn((hs.gx * 8 + 4) * T, (hs.gy * 8 + 3) * T);
 
     // characters and fixed props
-    this.luke = this.add.sprite(13.4 * T, 12.95 * T, 'char_luke').setOrigin(0.5, 1).play('char_luke_idle');
+    const rm = store.state?.settings.reduceMotion ?? false;
+    this.luke = this.fit(this.add.sprite(13.4 * T, 12.95 * T, 'char_luke').setOrigin(0.5, 1), 'char_luke');
+    this.idle(this.luke, 'char_luke', rm);
     this.avatar = this.add.container(8.7 * T, 11.9 * T);
-    this.van = this.add.image(21.2 * T, 20.8 * T, 'prop_van').setOrigin(0.5, 1);
-    this.andrewSign = this.add.image(23.2 * T, 23.6 * T, 'prop_sign').setOrigin(0.5, 1);
-    this.props.push(this.add.image(14.5 * T, 13 * T, 'prop_well').setOrigin(0.5, 1).setDepth(13 * T));
-    this.props.push(this.add.image(23.4 * T, 17 * T, 'prop_mailbox').setOrigin(0.5, 1).setDepth(17 * T));
-    this.luna = this.add.sprite(0, 0, 'luna_sleep').setOrigin(0.5, 1).play('luna_sleep_idle');
+    this.van = this.fit(this.add.image(21.2 * T, 20.8 * T, 'prop_van').setOrigin(0.5, 1), 'prop_van');
+    this.andrewSign = this.fit(this.add.image(23.2 * T, 23.6 * T, 'prop_sign').setOrigin(0.5, 1), 'prop_sign');
+    this.props.push(this.fit(this.add.image(14.5 * T, 13 * T, 'prop_well').setOrigin(0.5, 1).setDepth(13 * T), 'prop_well'));
+    this.props.push(this.fit(this.add.image(23.4 * T, 17 * T, 'prop_mailbox').setOrigin(0.5, 1).setDepth(17 * T), 'prop_mailbox'));
+    // final art for a sitting Luna stands in for the sleeping one until a sleeping sprite exists
+    const lunaKey = hasRealArt('luna_sit') && !hasRealArt('luna_sleep') ? 'luna_sit' : 'luna_sleep';
+    this.luna = this.fit(this.add.sprite(0, 0, lunaKey).setOrigin(0.5, 1), lunaKey, undefined, lunaKey === 'luna_sit' ? 0.85 : 1);
+    this.idle(this.luna, lunaKey, rm);
 
     this.labels = document.getElementById('world-labels') as HTMLDivElement;
     this.setupInput();
@@ -168,7 +196,9 @@ export class FarmScene extends Phaser.Scene {
     const rnd = new G.Rng('border');
     for (let i = -3; i < 27; i++) {
       for (const [x, y] of [[i, -2.2], [i, 25.6], [-1.6, i], [25.4, i]] as [number, number][]) {
-        if (rnd.chance(0.75)) this.add.image(x * T + rnd.int(-6, 6), y * T, 'prop_fir').setOrigin(0.5, 1).setDepth(y * T);
+        if (!rnd.chance(0.75)) continue;
+        const key = hasRealArt('prop_tree') && rnd.chance(0.25) ? 'prop_tree' : 'prop_fir';
+        this.fit(this.add.image(x * T + rnd.int(-6, 6), y * T, key).setOrigin(0.5, 1).setDepth(y * T), key, undefined, rnd.range(0.85, 1.1));
       }
     }
   }
@@ -222,6 +252,26 @@ export class FarmScene extends Phaser.Scene {
     }
   }
 
+  /** Trees and bramble thickets: woods, the orchard, and overgrown acres. */
+  private placeScenery(s: GameState) {
+    const key = JSON.stringify(s.parcels);
+    if (key === this.sceneryKey) return;
+    this.sceneryKey = key;
+    this.scenery.forEach((o) => o.destroy());
+    this.scenery = [];
+    const add = (id: string, x: number, y: number, mult = 1) => this.scenery.push(this.fit(this.add.image(x * T, y * T, id).setOrigin(0.5, 1).setDepth(y * T), id, undefined, mult));
+    const rnd = new G.Rng('scenery');
+    // Selleck Woods keeps its trees whatever its state (away from the plots and the hive)
+    for (const [x, y, id] of [[0.9, 1.6, 'prop_fir'], [3.2, 1.2, 'prop_tree'], [6.6, 1.4, 'prop_fir'], [1.2, 4.6, 'prop_tree'], [4.4, 4.4, 'prop_fir'], [7.2, 4.2, 'prop_fir'], [0.8, 7.6, 'prop_fir'], [3.4, 7.7, 'prop_tree']] as [number, number, string][]) add(id, x, y, rnd.range(0.8, 1.05));
+    // the orchard part of Coop and Orchard
+    for (const [x, y] of [[16.6, 12.3], [20.3, 12.2], [23.5, 12.6]]) add('prop_tree_apple', x, y, 0.85);
+    // bramble thickets on overgrown acres (the woods are trees enough)
+    for (const p of G.C().raw.parcels) {
+      if (s.parcels[p.id] !== 'overgrown' || p.id === 'selleck_woods') continue;
+      for (let i = 0; i < 5; i++) add('prop_brambles', p.gx * 8 + 0.8 + rnd.range(0, 6.4), p.gy * 8 + 1.2 + rnd.range(0, 6.4), rnd.range(0.9, 1.3));
+    }
+  }
+
   private setSeasonProps(s: GameState, season: string) {
     this.seasonProps.forEach((p) => p.destroy());
     this.seasonProps = [];
@@ -230,7 +280,7 @@ export class FarmScene extends Phaser.Scene {
     def?.props.slice(0, spots.length).forEach((id, i) => {
       const [x, y] = spots[i];
       if (!this.textures.exists(`decor_${id}`)) return;
-      this.seasonProps.push(this.add.image(x * T, y * T, `decor_${id}`).setOrigin(0.5, 1).setDepth(y * T));
+      this.seasonProps.push(this.fit(this.add.image(x * T, y * T, `decor_${id}`).setOrigin(0.5, 1).setDepth(y * T), `decor_${id}`));
     });
     // particles
     const tex = { spring: 'fx_petal', summer: 'fx_sparkle', fall: 'fx_leaf', winter: 'fx_snow' }[season] ?? 'fx_sparkle';
@@ -264,6 +314,7 @@ export class FarmScene extends Phaser.Scene {
       this.groundKey = gk;
       this.drawGround(s, season);
       this.setSeasonProps(s, season);
+      this.placeScenery(s);
     }
     this.syncPlots(s, now);
     this.syncBuildings(s, now);
@@ -297,13 +348,19 @@ export class FarmScene extends Phaser.Scene {
           v.cropId = crop.id;
           v.stage = -1;
         }
-        if (stage !== v.stage) v.crop.setFrame(stage);
+        if (stage !== v.stage) {
+          const cid = `crop_${crop.id}`;
+          // final art may cover only some stages (often just the ready one)
+          if (hasFrameArt(cid, stage)) this.fit(v.crop.setTexture(frameKey(cid, stage)), cid, stage);
+          else this.fit(v.crop.setTexture(cid, hasRealArt(cid) && this.textures.get(cid).frameTotal <= 2 ? undefined : stage), cid);
+        }
         if (ready && !v.ready && !s.settings.reduceMotion) {
-          this.tweens.add({ targets: v.crop, scaleY: 1.12, scaleX: 0.92, yoyo: true, repeat: -1, duration: 600, ease: 'Sine.easeInOut' });
+          const b = this.base(v.crop);
+          this.tweens.add({ targets: v.crop, scaleY: b * 1.08, scaleX: b * 0.95, yoyo: true, repeat: -1, duration: 600, ease: 'Sine.easeInOut' });
         }
         if (!ready && v.ready) {
           this.tweens.killTweensOf(v.crop);
-          v.crop.setScale(1);
+          v.crop.setScale(this.base(v.crop));
         }
         v.stage = stage;
         v.ready = ready;
@@ -345,6 +402,7 @@ export class FarmScene extends Phaser.Scene {
           v.roof.destroy();
           v.bar.destroy();
           v.bubble.destroy();
+          v.extras.forEach((o) => o.destroy());
           this.buildings.delete(b.id);
         }
         this.removeLabel(`bld:${b.id}`);
@@ -352,27 +410,57 @@ export class FarmScene extends Phaser.Scene {
       }
       const pos = this.buildingPos(b.id);
       const stageName = ['ruined', 'repair', 'restored'][st.stage];
-      const key = `bld_${b.id}_${stageName}`;
+      const stageKey = `bld_${b.id}_${stageName}`;
+      const restoredKey = `bld_${b.id}_restored`;
+      // with only restored final art, earlier stages are drawn from it (weathered, or under scaffolding)
+      const derived = st.stage < 2 && !hasRealArt(stageKey) && hasRealArt(restoredKey);
+      const key = derived ? `${restoredKey}~${stageName}` : stageKey;
+      const texKey = derived ? restoredKey : stageKey;
       if (!v) {
-        const sprite = this.add.sprite(pos.x, pos.y, key).setOrigin(0, 1).setDepth(pos.y);
-        v = { sprite, key, roof: this.add.graphics().setDepth(pos.y + 1), bar: this.add.graphics().setDepth(pos.y + 2), bubble: this.add.image(pos.x + pos.w / 2, pos.y - pos.h - 4, 'ui_star').setDepth(pos.y + 3).setScale(0.6).setVisible(false) };
+        const sprite = this.add.sprite(pos.x, pos.y, texKey).setOrigin(0, 1).setDepth(pos.y);
+        v = { sprite, key: '', roof: this.add.graphics().setDepth(pos.y + 1), bar: this.add.graphics().setDepth(pos.y + 2), bubble: this.add.image(pos.x + pos.w / 2, pos.y - pos.h - 4, 'ui_star').setDepth(pos.y + 3).setScale(0.6).setVisible(false), extras: [] };
         this.buildings.set(b.id, v);
       }
       if (v.key !== key) {
-        v.sprite.setTexture(key);
+        const first = v.key === '';
+        this.fit(v.sprite.setTexture(texKey), texKey);
         v.key = key;
-        if (st.stage === 2 && !s.settings.reduceMotion) this.tweens.add({ targets: v.sprite, scaleY: 1.06, yoyo: true, duration: 180 });
+        v.extras.forEach((o) => o.destroy());
+        v.extras = [];
+        if (derived && st.stage === 0) {
+          // brambles creeping up the walls
+          const n = Math.max(2, Math.round(pos.w / 28));
+          for (let i = 0; i < n; i++) {
+            const bx = pos.x + (pos.w * (i + 0.5)) / n;
+            v.extras.push(this.fit(this.add.image(bx, pos.y + 2, 'prop_brambles').setOrigin(0.5, 1).setDepth(pos.y + 0.5), 'prop_brambles', undefined, 0.75 + (i % 2) * 0.2));
+          }
+        }
+        if (st.stage === 2 && !first && !s.settings.reduceMotion) {
+          const base = this.base(v.sprite);
+          this.tweens.add({ targets: v.sprite, scaleY: base * 1.06, yoyo: true, duration: 180 });
+        }
+        v.bubble.setY(pos.y - v.sprite.displayHeight - 4);
       }
       // paint and roof cosmetics (visible on restored buildings)
       v.sprite.clearTint();
       v.roof.clear();
+      if (derived) {
+        if (st.stage === 0) v.sprite.setTint(0x8f8680);
+        else {
+          v.sprite.setTint(0xd9cbbd);
+          const top = pos.y - v.sprite.displayHeight;
+          v.roof.lineStyle(2, 0x8a5a34, 1);
+          for (let x = pos.x + 4; x < pos.x + pos.w; x += 14) v.roof.lineBetween(x, top + 6, x, pos.y);
+          for (let y = top + 12; y < pos.y; y += 14) v.roof.lineBetween(pos.x, y, pos.x + pos.w, y);
+        }
+      }
       if (st.stage === 2) {
         if (st.paint) {
           const c = Phaser.Display.Color.HexStringToColor(G.C().cosmetics.get(st.paint)?.color ?? '#FFFFFF');
           const mixed = Phaser.Display.Color.Interpolate.ColorWithColor(new Phaser.Display.Color(255, 255, 255), c, 100, 55);
           v.sprite.setTint(Phaser.Display.Color.GetColor(mixed.r, mixed.g, mixed.b));
         }
-        if (st.roof) {
+        if (st.roof && !hasRealArt(restoredKey)) {
           const rc = Phaser.Display.Color.HexStringToColor(G.C().cosmetics.get(st.roof)?.color ?? '#5A5F73').color;
           const top = pos.y - pos.h;
           const wallTop = top + Math.floor(pos.h * 0.45);
@@ -384,7 +472,7 @@ export class FarmScene extends Phaser.Scene {
         }
         // a star per visible-level milestone reached
         const stars = b.visibleLevels.filter((l) => st.level >= l).length;
-        for (let i = 0; i < stars; i++) v.roof.fillStyle(0xffd93b, 1).fillCircle(pos.x + 6 + i * 7, pos.y - pos.h + 6, 2.5);
+        for (let i = 0; i < stars; i++) v.roof.fillStyle(0xffd93b, 1).fillCircle(pos.x + 6 + i * 7, pos.y - v.sprite.displayHeight + 6, 2.5);
       }
       v.bar.clear();
       if (st.stage === 1 && st.repairEndsAt && st.repairStartedAt) {
@@ -393,7 +481,7 @@ export class FarmScene extends Phaser.Scene {
         v.bar.fillStyle(0xb48ae0, 1).fillRect(pos.x + 5, pos.y + 3, (pos.w - 10) * prog, 3);
         this.label(`bld:${b.id}`, G.formatDuration(st.repairEndsAt - now), pos.x + pos.w / 2, pos.y + 14, 'timer');
       } else if (st.stage === 0) {
-        this.label(`bld:${b.id}`, 'Repair', pos.x + pos.w / 2, pos.y - pos.h / 2, 'tag');
+        this.label(`bld:${b.id}`, 'Repair', pos.x + pos.w / 2, pos.y - v.sprite.displayHeight / 2, 'tag');
       } else this.removeLabel(`bld:${b.id}`);
       // attention bubble
       let bubble: string | null = null;
@@ -423,15 +511,16 @@ export class FarmScene extends Phaser.Scene {
         v?.c.destroy();
         const area = this.animalArea(def.kind);
         const pt = area.getRandomPoint();
-        const body = this.add.sprite(0, 0, `anim_${a.kind}`).setOrigin(0.5, 1).play(`anim_${a.kind}_idle`);
-        const bubble = this.add.image(0, -body.height - 6, 'item_egg').setScale(0.55).setVisible(false);
+        const body = this.fit(this.add.sprite(0, 0, `anim_${a.kind}`).setOrigin(0.5, 1), `anim_${a.kind}`);
+        this.idle(body, `anim_${a.kind}`, s.settings.reduceMotion);
+        const bubble = this.add.image(0, -body.displayHeight - 8, 'item_egg').setVisible(false);
         const c = this.add.container(pt.x, pt.y, [body, bubble]);
         v = { c, body, bubble, kind: a.kind, nextMove: now + Math.random() * 4000 };
         this.animals.set(a.id, v);
       }
       this.dressAnimal(v, a);
       v.bubble.setVisible(a.stored > 0);
-      if (def.product) v.bubble.setTexture(`item_${def.product}`);
+      if (def.product && v.bubble.texture.key !== `item_${def.product}`) this.fit(v.bubble.setTexture(`item_${def.product}`), `item_${def.product}`, undefined, 0.55);
       v.c.setDepth(v.c.y);
     }
     for (const [id, v] of this.animals) if (!seen.has(id)) {
@@ -440,28 +529,42 @@ export class FarmScene extends Phaser.Scene {
     }
   }
 
+  /** Head position in container space (scaled from the art's own pixels), before mirroring. */
+  private headOffset(v: AnimalView): { x: number; y: number; span?: number } {
+    const id = `anim_${v.kind}`;
+    const meta = artMeta(id);
+    const sc = this.base(v.body);
+    const [hx, hy] = meta.headAnchor ?? [v.body.width / 2, 4];
+    return { x: (hx - v.body.width / 2) * sc, y: (hy - v.body.height) * sc, span: meta.hornSpan ? meta.hornSpan * sc : undefined };
+  }
+
   private dressAnimal(v: AnimalView, a: AnimalState) {
-    const e = entry(`anim_${a.kind}`);
-    const [hx, hy] = e?.headAnchor ?? [v.body.width / 2, 4];
-    const ox = -v.body.width / 2;
-    const oy = -v.body.height;
+    const head = this.headOffset(v);
     if (a.hat !== v.hatId) {
       v.hat?.destroy();
-      v.hat = a.hat && this.textures.exists(`cos_${a.hat}`) ? this.add.image(ox + hx, oy + hy + 2, `cos_${a.hat}`).setOrigin(0.5, 1) : undefined;
+      const key = `cos_${a.hat}`;
+      v.hat = a.hat && this.textures.exists(key) ? this.add.image(head.x, head.y + 2, key).setOrigin(0.5, 1) : undefined;
       if (v.hat) {
-        // horn-aware: hats sit between the horns and never wider than the horn span
-        const span = e?.hornSpan;
-        if (span && v.hat.width > span) v.hat.setScale(span / v.hat.width);
+        // horn-aware: hats sit between the horns and are sized to the horn span (or the head)
+        const target = head.span ? head.span * 0.75 : v.body.displayWidth * 0.4;
+        const natural = v.hat.width * displayScale(key);
+        v.hat.setScale(displayScale(key) * (hasRealArt(key) || hasRealArt(`anim_${a.kind}`) || natural > target ? target / natural : 1));
         v.c.add(v.hat);
       }
       v.hatId = a.hat;
     }
     if (a.neck !== v.neckId) {
       v.neck?.destroy();
-      v.neck = a.neck && this.textures.exists(`cos_${a.neck}`) ? this.add.image(ox + hx - 2, oy + hy + 10, `cos_${a.neck}`) : undefined;
+      v.neck = a.neck && this.textures.exists(`cos_${a.neck}`) ? this.fit(this.add.image(head.x, head.y + v.body.displayHeight * 0.25, `cos_${a.neck}`), `cos_${a.neck}`) : undefined;
       if (v.neck) v.c.add(v.neck);
       v.neckId = a.neck;
     }
+  }
+
+  /** Flip so the animal faces where it is walking, whichever way its art was drawn. */
+  private face(v: AnimalView, towardLeft: boolean) {
+    const drawnLeft = artMeta(`anim_${v.kind}`).facing === 'left';
+    v.body.setFlipX(towardLeft !== drawnLeft);
   }
 
   private syncDecor(s: GameState) {
@@ -476,7 +579,7 @@ export class FarmScene extends Phaser.Scene {
       const x = (d.x + fw / 2) * T;
       const y = (d.y + fh) * T;
       if (!sp) {
-        sp = this.add.sprite(x, y, `decor_${d.id}`).setOrigin(0.5, 1);
+        sp = this.fit(this.add.sprite(x, y, `decor_${d.id}`).setOrigin(0.5, 1), `decor_${d.id}`);
         if (def.animated && this.anims.exists(`decor_${d.id}_idle`)) sp.play(`decor_${d.id}_idle`);
         this.decor.set(d.uid, sp);
       }
@@ -745,7 +848,7 @@ export class FarmScene extends Phaser.Scene {
     if (!def) return;
     if (!this.ghost || this.ghost.texture.key !== `decor_${placing}`) {
       this.ghost?.destroy();
-      this.ghost = this.add.sprite(0, 0, `decor_${placing}`).setOrigin(0.5, 1).setDepth(9500).setAlpha(0.6);
+      this.ghost = this.fit(this.add.sprite(0, 0, `decor_${placing}`).setOrigin(0.5, 1).setDepth(9500).setAlpha(0.6), `decor_${placing}`);
     }
     const tx = Math.floor(p.worldX / T - def.w / 2 + 0.5);
     const ty = Math.floor(p.worldY / T - def.h / 2 + 0.5);
@@ -830,7 +933,7 @@ export class FarmScene extends Phaser.Scene {
           const def = G.C().animals.get(a.kind)!;
           const qty = store.act((st, n) => G.collectAnimal(st, hit.id, n));
           if (v && qty) this.floatText(v.c.x, v.c.y - 30, `+${qty} ${G.itemName(def.product!)}`);
-          if (v && !s.settings.reduceMotion) this.tweens.add({ targets: v.body, scaleY: 0.85, yoyo: true, duration: 120 });
+          if (v && !s.settings.reduceMotion) this.tweens.add({ targets: v.body, scaleY: this.base(v.body) * 0.85, yoyo: true, duration: 120 });
         } else nav.openSheet({ kind: 'animal', id: hit.id });
         break;
       }
@@ -840,7 +943,7 @@ export class FarmScene extends Phaser.Scene {
           s.decorTaps[d.id] = (s.decorTaps[d.id] ?? 0) + 1;
           this.checkEgg('decorTap', s.decorTaps[d.id], d.id);
           const sp = this.decor.get(hit.uid);
-          if (sp && !s.settings.reduceMotion) this.tweens.add({ targets: sp, scaleY: 1.08, scaleX: 0.94, yoyo: true, duration: 110 });
+          if (sp && !s.settings.reduceMotion) this.tweens.add({ targets: sp, scaleY: this.base(sp) * 1.08, scaleX: this.base(sp) * 0.94, yoyo: true, duration: 110 });
         }
         break;
       }
@@ -920,8 +1023,8 @@ export class FarmScene extends Phaser.Scene {
   // ---------- juice ----------
   private pop(x: number, y: number, key: string) {
     if (!this.textures.exists(key)) return;
-    const img = this.add.image(x, y, key).setDepth(9800).setScale(0.6);
-    this.tweens.add({ targets: img, y: y - 30, scale: 0.9, alpha: 0, duration: 650, ease: 'Cubic.easeOut', onComplete: () => img.destroy() });
+    const img = this.fit(this.add.image(x, y, key).setDepth(9800), key, undefined, 0.6);
+    this.tweens.add({ targets: img, y: y - 30, scale: this.base(img) * 1.5, alpha: 0, duration: 650, ease: 'Cubic.easeOut', onComplete: () => img.destroy() });
   }
 
   private burst(x: number, y: number, key: string, n: number) {
@@ -1050,19 +1153,16 @@ export class FarmScene extends Phaser.Scene {
         const def = G.C().animals.get(v.kind);
         const pt = this.animalArea(def?.kind ?? 'cow').getRandomPoint();
         const dist = Phaser.Math.Distance.Between(v.c.x, v.c.y, pt.x, pt.y);
-        v.body.setFlipX(pt.x < v.c.x);
-        if (v.hat) v.hat.setX(v.body.flipX ? -v.hat.x : Math.abs(v.hat.x) * (v.hat.x < 0 ? -1 : 1));
+        this.face(v, pt.x < v.c.x);
         this.tweens.add({ targets: v.c, x: pt.x, y: pt.y, duration: dist * (def?.kind === 'cow' ? 90 : 45), ease: 'Linear', onUpdate: () => v.c.setDepth(v.c.y) });
         v.nextMove = now + 3000 + Math.random() * 7000 + dist * 60;
       }
     }
     // keep animal accessories mirrored with the body
     for (const v of this.animals.values()) {
-      const e = entry(`anim_${v.kind}`);
-      const [hx] = e?.headAnchor ?? [v.body.width / 2, 0];
-      const off = hx - v.body.width / 2;
+      const off = this.headOffset(v).x;
       if (v.hat) v.hat.x = v.body.flipX ? -off : off;
-      if (v.neck) v.neck.x = (v.body.flipX ? -off : off) + (v.body.flipX ? 2 : -2);
+      if (v.neck) v.neck.x = v.body.flipX ? -off : off;
     }
     const view = this.cameras.main.worldView;
     this.emitRect.setTo(view.x, view.y - 10, view.width, 2);

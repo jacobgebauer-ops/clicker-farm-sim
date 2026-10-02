@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { MiniGameScene } from '../base';
 import type { MiniGame, MiniGameContext } from '../types';
 import { sfx } from '../../../audio/audio';
+import { displayScale } from '../../assets';
 
 const KEY = 'mg_egg_catch';
 
@@ -31,7 +32,7 @@ class EggCatchScene extends MiniGameScene {
     this.streak = 0;
     this.basket = this.add.image(this.W / 2, this.H - 90, 'mg_basket').setScale(1.6).setDepth(10);
     this.targetX = this.W / 2;
-    for (let i = 0; i < 5; i++) this.add.image(30 + i * ((this.W - 60) / 4), 70, 'anim_hen', 0).setScale(1.5);
+    for (let i = 0; i < 5; i++) this.add.image(30 + i * ((this.W - 60) / 4), 76, 'anim_hen').setScale(1.5 * displayScale('anim_hen')).setFlipX(i % 2 === 1);
     const move = (p: Phaser.Input.Pointer) => {
       if (this.running) this.targetX = Phaser.Math.Clamp(p.x / this.Z, 30, this.W - 30);
     };

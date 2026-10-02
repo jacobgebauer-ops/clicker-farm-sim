@@ -170,7 +170,9 @@ Every slot is in `assets/manifest.json` (regenerate with `npm run manifest`). Fi
 npm run art:process -- ./art-inbox --palette
 ```
 
-Name inbox files after the manifest id (`anim_highland_cow.png`), or one file per frame (`anim_highland_cow_f0.png`, `anim_highland_cow_f1.png`). Backgrounds must be solid magenta `#FF00FF`.
+Name inbox files after the manifest id (`anim_highland_cow.png`), or one file per frame (`anim_highland_cow_f0.png`, `anim_highland_cow_f1.png`). Backgrounds must be solid magenta `#FF00FF` or already transparent.
+
+Add `--native` to keep the art's own resolution (recommended for detailed art; the game fits it to the slot), and `--map map.json` to rename, crop, or target a single frame without renaming files. See `assets/grok-map.json` for a working example. For animal art, add its head anchor (in the art's own pixels), horn span, and facing to `assets/art-meta.json` so hats sit right.
 
 **AI output usually needs a manual cleanup pass.** Image generators produce soft, anti-aliased edges, uneven pixel sizes, and stray colors. Open the processed PNG in a pixel editor (Aseprite or the free Pixelorama) and:
 - remove pink fringe pixels left by the magenta key,

@@ -1,9 +1,16 @@
 // Turns raw AI-generated images into game-ready sprites.
 //
-//   npm run art:process -- <inboxDir> [--palette] [--dry] [--tolerance 60]
+//   npm run art:process -- <inboxDir> [--native] [--map map.json] [--palette] [--dry] [--tolerance 60]
 //
 // File names must match a manifest id: `crop_pumpkin.png`, or one file per frame
 // (`anim_hen_f0.png`, `anim_hen_f1.png`). PNG and JPG are supported.
+//
+// --native keeps the source resolution (trim only, no downscale). The game fits final art to
+// each slot's footprint at draw time, so detailed art keeps its detail. Single-frame files
+// named `<id>_f<n>` become per-frame overrides (for example only the ready stage of a crop).
+// --map points at a JSON list that renames sources and can crop them:
+//   [{ "src": "pumpkin_s3", "id": "crop_pumpkin", "frame": 3 },
+//    { "src": "luke", "id": "portrait_luke", "crop": [0, 0, 45, 45] }]
 // Steps per image: key out the solid magenta (#FF00FF) background, trim, downscale with
 // nearest-neighbor (majority color per block) to the manifest size, optionally snap to the
 // global palette, then write public/assets/<path>. Warnings flag non-integer scale ratios
@@ -16,10 +23,12 @@ import { buildManifest } from './manifest.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const args = process.argv.slice(2);
-const inbox = args.find((a) => !a.startsWith('--'));
+const inbox = args.find((a, i) => !a.startsWith('--') && args[i - 1] !== '--map' && args[i - 1] !== '--tolerance');
 const usePalette = args.includes('--palette');
 const dry = args.includes('--dry');
 const tol = Number(args[args.indexOf('--tolerance') + 1]) || 60;
+const native = args.includes('--native');
+const mapFile = args.includes('--map') ? args[args.indexOf('--map') + 1] : null;
 
 const PALETTE = [
   '#2B1B3D', '#7B4FB5', '#B48AE0', '#4A2B7A', '#9FE3C0', '#FFB7D5', '#FFF1A8', '#9AD7FF', '#37D4D0', '#FFD93B', '#FF7F6B', '#F5DFA6',
@@ -118,12 +127,86 @@ function strayPixels(c) {
   return n;
 }
 
+function cropCanvas(src, [x, y, w, h]) {
+  const out = new Canvas(w, h);
+  for (let yy = 0; yy < h; yy++) for (let xx = 0; xx < w; xx++) out.set(xx, yy, src.get(x + xx, y + yy));
+  return out;
+}
+
+/** Key, trim, and write at source resolution. `frame` writes a per-frame override file. */
+function writeNative(e, src, frame, warnings, label) {
+  const fringe = keyOut(src);
+  if (fringe > 20) warnings.push(`${label}: ${fringe} pinkish anti-aliased pixels survived the magenta key`);
+  const box = bbox(src);
+  if (!box) {
+    warnings.push(`${label}: image is empty after keying`);
+    return null;
+  }
+  let out = cropCanvas(src, [box.x, box.y, box.w, box.h]);
+  if (usePalette) for (let i = 0; i < out.data.length; i += 4) if (out.data[i + 3]) {
+    const p = nearestPalette([out.data[i], out.data[i + 1], out.data[i + 2], 255]);
+    out.data[i] = p[0]; out.data[i + 1] = p[1]; out.data[i + 2] = p[2];
+  }
+  const stray = strayPixels(out);
+  if (stray > 3) warnings.push(`${label}: ${stray} stray single pixels (anti-aliasing noise); clean up in a pixel editor`);
+  const rel = frame === null || frame === undefined ? e.path : e.path.replace(/\.png$/, `_f${frame}.png`);
+  const dest = path.join(root, 'public', rel);
+  if (!dry) {
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, out.toPNG());
+  }
+  console.log(`${dry ? '[dry] ' : ''}${label} -> public/${rel} (${out.w}x${out.h}, native)`);
+  return out;
+}
+
+function findSource(name) {
+  for (const ext of ['.png', '.jpg', '.jpeg']) {
+    const f = path.join(inbox, name + ext);
+    if (fs.existsSync(f)) return f;
+  }
+  return null;
+}
+
+function runMap(manifest) {
+  const entries = JSON.parse(fs.readFileSync(mapFile, 'utf8'));
+  const warnings = [];
+  let written = 0;
+  for (const m of entries) {
+    const e = manifest.get(m.id);
+    const file = findSource(m.src);
+    if (!e) { warnings.push(`${m.src}: no manifest id "${m.id}"`); continue; }
+    if (!file) { warnings.push(`${m.src}: source not found in ${inbox}`); continue; }
+    let src = decode(file);
+    if (m.crop) src = cropCanvas(src, m.crop);
+    const label = `${m.src} as ${m.id}${m.frame !== undefined ? ` frame ${m.frame}` : ''}`;
+    if (native) {
+      if (writeNative(e, src, m.frame ?? null, warnings, label)) written++;
+      continue;
+    }
+    keyOut(src);
+    const box = bbox(src);
+    if (!box) continue;
+    const out = downscale(src, box, e.w, e.h, warnings, label);
+    const rel = m.frame !== undefined ? e.path.replace(/\.png$/, `_f${m.frame}.png`) : e.path;
+    if (!dry) {
+      fs.mkdirSync(path.dirname(path.join(root, 'public', rel)), { recursive: true });
+      fs.writeFileSync(path.join(root, 'public', rel), out.toPNG());
+    }
+    console.log(`${dry ? '[dry] ' : ''}${label} -> public/${rel} (${e.w}x${e.h})`);
+    written++;
+  }
+  for (const w of warnings) console.warn(`warn ${w}`);
+  console.log(`\nart:process: ${written} sprite(s) ${dry ? 'checked' : 'written'}, ${warnings.length} warning(s).`);
+  if (written) console.log('Remember to add a line to ASSETS_LICENSES.md for each new asset (source, tool, license, date).');
+}
+
 function main() {
   if (!inbox || !fs.existsSync(inbox)) {
     console.error('Usage: npm run art:process -- <inboxDir> [--palette] [--dry] [--tolerance 60]');
     process.exit(1);
   }
   const manifest = new Map(buildManifest().map((e) => [e.id, e]));
+  if (mapFile) return runMap(manifest);
   const files = fs.readdirSync(inbox).filter((f) => /\.(png|jpe?g)$/i.test(f)).sort();
   const groups = new Map();
   const unknown = [];
@@ -140,6 +223,15 @@ function main() {
   let written = 0;
   for (const [id, frames] of groups) {
     const e = manifest.get(id);
+    if (native) {
+      // whole image as the base art, or individual `_f<n>` files as per-frame overrides
+      frames.forEach((file, f) => {
+        if (!file) return;
+        const isFrameFile = /_f\d\.(png|jpe?g)$/i.test(file);
+        if (writeNative(e, decode(file), isFrameFile ? f : null, warnings, `${id}${isFrameFile ? `[${f}]` : ''}`)) written++;
+      });
+      continue;
+    }
     const out = new Canvas(e.w * e.frames, e.h);
     // one source image with several frames side by side is also accepted
     if (frames.length === 1 && e.frames > 1) {

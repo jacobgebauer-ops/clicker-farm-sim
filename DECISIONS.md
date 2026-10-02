@@ -3,7 +3,14 @@
 Judgment calls made while building, one line each.
 
 ## Build and tooling
-- The sprite zip on Google Drive (11.9 MB) could not be fetched from the build environment (the Drive connector caps downloads at 10 MB and the network policy blocks drive.google.com), so the game ships with generated placeholders and the `art:process` pipeline for dropping the sprites in later.
+- The sprite zip could not be fetched from Google Drive at first (the connector caps downloads at 10 MB and the network policy blocks drive.google.com); it arrived later as an upload and its 32 sprites are now in the game.
+- Final art is kept at its own resolution (`art:process --native`) and fitted to each slot when drawn: buildings, decor, and props fill their footprint width and may grow taller; everything else fits inside its box. Downscaling the supplied sprites to the 32 px grid would have thrown away most of their detail.
+- Final art may cover only some frames (`<id>_f<n>.png`): the three crops came as ready-stage art only, so earlier stages keep their placeholder sprouts.
+- Buildings with only restored final art show their ruined stage as that art grayed with bramble thickets, and the repair stage lightly tinted under scaffolding, until dedicated art exists.
+- Head anchors, horn spans, and facing for final animal art live in `assets/art-meta.json`; animals flip to face where they walk whichever way their art was drawn.
+- Single-frame final art gets a gentle code "breathing" animation instead of a frame strip.
+- Supplied art with no matching slot was put to use: the calf became a buyable Highland calf that grows into a cow in two days, the blackberry jam became a new recipe, Claire's cafe is the header of her shop tab, and the trees and brambles became farm scenery (border, Selleck Woods, the orchard, overgrown acres).
+- Final art stays visible in Luna's sitting pose until a sleeping sprite exists.
 - Stack versions: Phaser 3.90, Preact 10, Vite 7, TypeScript 5.9, Zod 4, Vitest 3, Playwright 1.56 (matches the preinstalled Chromium), vite-plugin-pwa 1.3.
 - Hashed JS and CSS bundles go to `/static` so they never mix with final art under `/assets`.
 - Placeholders are generated (`npm run placeholders`, also run by `dev` and `build`) and not committed; real art in `public/assets` always wins.
