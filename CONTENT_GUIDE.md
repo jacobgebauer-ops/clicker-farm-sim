@@ -174,8 +174,23 @@ Name inbox files after the manifest id (`anim_highland_cow.png`), or one file pe
 
 Add `--native` to keep the art's own resolution (recommended for detailed art; the game fits it to the slot), and `--map map.json` to rename, crop, or target a single frame without renaming files. See `assets/grok-map.json` for a working example. For animal art, add its head anchor (in the art's own pixels), horn span, and facing to `assets/art-meta.json` so hats sit right.
 
+Ask the image tool to leave the solid magenta background in place. Its own background removal tends to erase pink, red, and purple parts of the sprite along with the background; `art:process` removes only the exact magenta. If a batch comes back already cut out and damaged, list the damaged sprites in `assets/art-fixes.json`:
+
+```json
+{
+  "fillHoles": {
+    "prop_van": 400,
+    "cos_hat_flower_crown": { "max": 250, "color": "#FFB7D5", "shade": "#E77287" },
+    "char_claire": { "max": 40, "rows": [31, 65], "color": "#E77287", "shade": "#B74769" },
+    "crop_*": 40
+  },
+  "skip": { "tile_fence_v": "why this file is ignored" }
+}
+```
+
+A number fills see-through regions inside the sprite up to that many pixels with a blend of the colors around them. `color` (and `shade` along the outline) repaints them in a known color instead, for areas whose color is gone. `rows` also fills between the outline on those rows, for an area whose outline is broken. A trailing `*` matches every id with that prefix, and an exact id wins. List only sprites whose holes are damage: real gaps such as a lock's shackle are filled too if listed. Edge pixels tinted by the magenta are recolored to the plum outline automatically.
+
 **AI output usually needs a manual cleanup pass.** Image generators produce soft, anti-aliased edges, uneven pixel sizes, and stray colors. Open the processed PNG in a pixel editor (Aseprite or the free Pixelorama) and:
-- remove pink fringe pixels left by the magenta key,
 - fix lines so they are one pixel wide with the plum outline `#2B1B3D`,
 - check animals and characters most carefully: faces, horns, legs, and the Highland cow's bangs tend to come out muddy,
 - keep frames the same size and baseline so animations do not wobble.

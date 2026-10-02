@@ -8,6 +8,10 @@ Judgment calls made while building, one line each.
 - Final art may cover only some frames (`<id>_f<n>.png`): the three crops came as ready-stage art only, so earlier stages keep their placeholder sprouts.
 - Buildings with only restored final art show their ruined stage as that art grayed with bramble thickets, and the repair stage lightly tinted under scaffolding, until dedicated art exists.
 - Head anchors, horn spans, and facing for final animal art live in `assets/art-meta.json`; animals flip to face where they walk whichever way their art was drawn.
+- `art:process` recolors dark magenta edge pixels (left by anti-aliasing against the key) to the plum outline, so sprites have no pink halo in game. Real purples survive because the check needs red and blue nearly equal.
+- The generator's own background removal erased pink, red, and purple areas inside some sprites (van panels, Claire's blouse, the flower crown, ornaments, apples). `assets/art-fixes.json` lists the damaged sprites and how to refill them; real gaps (a lock shackle, easel legs, the well opening) are left alone because no automatic rule tells them apart. The art prompts now ask for the magenta background to be left in place.
+- The supplied vertical fence was drawn side on, so the game builds the vertical piece from the horizontal one (a post with the rail turned on end) until a proper one exists; `art-fixes.json` skips the supplied file.
+- Ground variants are blended over a base tile at 30 percent instead of swapped in, because the detailed final tiles differ too much in color and read as a checkerboard; the woods use the woods floor alone.
 - Single-frame final art gets a gentle code "breathing" animation instead of a frame strip.
 - Supplied art with no matching slot was put to use: the calf became a buyable Highland calf that grows into a cow in two days, the blackberry jam became a new recipe, Claire's cafe is the header of her shop tab, and the trees and brambles became farm scenery (border, Selleck Woods, the orchard, overgrown acres).
 - Final art stays visible in Luna's sitting pose until a sleeping sprite exists.

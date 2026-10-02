@@ -217,16 +217,24 @@ export class FarmScene extends Phaser.Scene {
         const p = this.parcelAt(tx, ty)!;
         const st = s.parcels[p.id];
         const lx = tx % 8;
+        // a base tile per ground type, with a variant blended over some tiles for texture;
+        // blending (not swapping) keeps detailed final art from reading as a checkerboard
         let key = 'tile_grass';
-        if (st === 'overgrown') key = rnd.chance(0.5) ? 'tile_bramble_dense' : 'tile_bramble';
-        else if (p.ground === 'meadow') key = rnd.chance(0.3) ? 'tile_grass' : 'tile_meadow';
-        else if (p.ground === 'woods') key = rnd.chance(0.6) ? 'tile_woods_floor' : 'tile_grass_dark';
+        let variant: string | null = null;
+        if (st === 'overgrown') {
+          key = 'tile_bramble';
+          if (rnd.chance(0.5)) variant = 'tile_bramble_dense';
+        } else if (p.ground === 'meadow') {
+          key = 'tile_meadow';
+          if (rnd.chance(0.3)) variant = 'tile_grass';
+        } else if (p.ground === 'woods') key = 'tile_woods_floor';
         else if (p.ground === 'gravel') key = lx < 2 || ty % 8 > 5 ? 'tile_grass' : 'tile_gravel';
         else if (p.ground === 'creek') key = lx === 6 ? 'tile_water' : lx === 5 || lx === 7 ? 'tile_creek_bank' : 'tile_grass';
-        else key = rnd.chance(0.25) ? 'tile_grass_dark' : 'tile_grass';
-        if (st !== 'overgrown' && isPath(tx, ty) && key !== 'tile_water') key = 'tile_path';
-        if (st !== 'overgrown' && season === 'summer' && p.id === 'homestead' && lx === 7 && ty % 8 === 7) key = 'tile_sand';
+        else if (rnd.chance(0.25)) variant = 'tile_grass_dark';
+        if (st !== 'overgrown' && isPath(tx, ty) && key !== 'tile_water') [key, variant] = ['tile_path', null];
+        if (st !== 'overgrown' && season === 'summer' && p.id === 'homestead' && lx === 7 && ty % 8 === 7) [key, variant] = ['tile_sand', null];
         rt.drawFrame(key, undefined, tx * T, ty * T);
+        if (variant) rt.drawFrame(variant, undefined, tx * T, ty * T, 0.3);
       }
     }
     // fences around fully restored parcels

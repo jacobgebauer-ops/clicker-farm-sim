@@ -45,7 +45,14 @@ if (data) {
     failed = true;
     console.error(`Missing manifest slots: ${noSlot.join(', ')}`);
   }
-  const missingArt = manifest.filter((e: { path: string }) => !fs.existsSync(path.join(root, 'public', e.path)));
+  // a slot counts as drawn when its file exists, when a single frame of it exists (a crop's
+  // ready stage), or when it is a ruined or repair stage the game derives from restored art
+  const has = (p: string) => fs.existsSync(path.join(root, 'public', p));
+  const drawn = (e: { id: string; path: string; frames: number }) =>
+    has(e.path) ||
+    Array.from({ length: e.frames }, (_, f) => e.path.replace(/\.png$/, `_f${f}.png`)).some(has) ||
+    (/_(ruined|repair)$/.test(e.id) && has(e.path.replace(/_(ruined|repair)\.png$/, '_restored.png')));
+  const missingArt = manifest.filter((e: { id: string; path: string; frames: number }) => !drawn(e));
   const byCat = new Map<string, number>();
   for (const e of missingArt) byCat.set(e.category, (byCat.get(e.category) ?? 0) + 1);
   console.log(`Content OK: ${data.crops.length} crops, ${data.recipes.length} recipes, ${data.wines.length} wines, ${data.decor.length} decor, ${data.cosmetics.length} cosmetics, ${data.quests.length} quests, ${data.achievements.length} achievements, ${data.dialogue.lines.length} dialogue lines.`);

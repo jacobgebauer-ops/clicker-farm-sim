@@ -142,6 +142,7 @@ class WeedPullScene extends MiniGameScene {
       const row = Math.floor(Math.random() * ROWS);
       this.luna = this.add.sprite(this.lunaDir > 0 ? -20 : this.W + 20, this.cy(row) + 12, 'luna_walk').setOrigin(0.5, 1).setScale(1.5 * displayScale('luna_walk')).setDepth(50).setFlipX(this.lunaDir < 0);
       if (this.anims.exists('luna_walk_idle')) this.luna.play('luna_walk_idle');
+      else this.tweens.add({ targets: this.luna, y: this.luna.y - 2, duration: 160, yoyo: true, repeat: -1 });
     }
     if (this.luna) {
       this.luna.x += this.lunaDir * 45 * dt;

@@ -66,6 +66,141 @@ function keyOut(c) {
   return fringe;
 }
 
+/**
+ * Edge pixels that were anti-aliased against the magenta key come out dark magenta and read
+ * as a pink halo in game. Recolor them to the outline plum. Only pixels touching transparency
+ * with a red/blue balance close to magenta are touched, so real purples (blue heavy) survive.
+ */
+function defringe(c) {
+  const src = c.data.slice();
+  const clear = (x, y) => x < 0 || y < 0 || x >= c.w || y >= c.h || src[(y * c.w + x) * 4 + 3] === 0;
+  let n = 0;
+  for (let y = 0; y < c.h; y++) for (let x = 0; x < c.w; x++) {
+    const i = (y * c.w + x) * 4;
+    if (src[i + 3] === 0) continue;
+    if (!clear(x - 1, y) && !clear(x + 1, y) && !clear(x, y - 1) && !clear(x, y + 1)) continue;
+    const [r, g, b] = [src[i], src[i + 1], src[i + 2]];
+    const lo = Math.min(r, b);
+    if (lo < 40 || g > lo * 0.3 || Math.abs(r - b) > Math.max(r, b) * 0.25) continue;
+    c.data[i] = 0x2b; c.data[i + 1] = 0x1b; c.data[i + 2] = 0x3d;
+    n++;
+  }
+  return n;
+}
+
+/**
+ * Some generators key out pink and red shades inside a sprite along with the magenta
+ * background, leaving see-through seams (van panels, pea flowers, a rooster's belly).
+ * Enclosed transparent regions up to `max` pixels are filled from their edges inward
+ * with a slightly darkened blend of the surrounding colors. Real gaps (a lock shackle,
+ * easel legs) are kept by listing only damaged sprites in assets/art-fixes.json.
+ * `color` (with `shade` next to the outline) repaints holes in a known color instead, for
+ * areas whose color was lost entirely (pink flowers, red ornaments). When a whole area was
+ * keyed out and its outline is broken, `rows: [y0, y1]` also repaints every transparent
+ * pixel between the leftmost and rightmost opaque pixel of those rows.
+ */
+function fillHoles(c, fix) {
+  const { max = 0, rows, color, shade } = typeof fix === 'number' ? { max: fix } : fix;
+  const W = c.w, H = c.h, N = W * H;
+  const clear = (i) => c.data[i * 4 + 3] === 0;
+  const nb4 = (i) => { const x = i % W, y = (i / W) | 0; return [x > 0 ? i - 1 : -1, x < W - 1 ? i + 1 : -1, y > 0 ? i - W : -1, y < H - 1 ? i + W : -1].filter((k) => k >= 0); };
+  const rgb = (h) => [1, 3, 5].map((k) => parseInt(h.slice(k, k + 2), 16));
+  const paint = (writes) => {
+    for (const [j, [r, g, b]] of writes) {
+      c.data[j * 4] = r; c.data[j * 4 + 1] = g; c.data[j * 4 + 2] = b; c.data[j * 4 + 3] = 255;
+    }
+    return writes.length;
+  };
+  let filled = 0;
+  if (rows && color) {
+    const base = rgb(color);
+    const edge = shade ? rgb(shade) : base;
+    const writes = [];
+    const span = (y) => {
+      let a = W, b = -1;
+      for (let x = 0; x < W; x++) if (!clear(y * W + x)) { a = Math.min(a, x); b = x; }
+      return [a, b];
+    };
+    // the neighbor rows bridge short breaks in the outline (a shoulder line with a gap)
+    const ys = [];
+    for (let y = Math.max(0, rows[0]); y <= Math.min(H - 1, rows[1]); y++) ys.push(y);
+    const spans = new Map(ys.map((y) => [y, span(y)]));
+    for (const y of ys) {
+      const near = [y - 1, y, y + 1].filter((v) => spans.has(v)).map((v) => spans.get(v));
+      const x0 = Math.min(...near.map((n) => n[0]));
+      const x1 = Math.max(...near.map((n) => n[1]));
+      for (let x = x0 + 1; x1 >= 0 && x < x1; x++) {
+        const j = y * W + x;
+        if (clear(j)) writes.push([j, nb4(j).some((k) => !clear(k)) ? edge : base]);
+      }
+    }
+    filled += paint(writes);
+  }
+  const outside = new Uint8Array(N);
+  const stack = [];
+  for (let x = 0; x < W; x++) stack.push(x, (H - 1) * W + x);
+  for (let y = 0; y < H; y++) stack.push(y * W, y * W + W - 1);
+  while (stack.length) {
+    const i = stack.pop();
+    if (outside[i] || !clear(i)) continue;
+    outside[i] = 1;
+    stack.push(...nb4(i));
+  }
+  const seen = new Uint8Array(N);
+  for (let i = 0; i < N; i++) {
+    if (!clear(i) || outside[i] || seen[i]) continue;
+    const comp = [];
+    const q = [i];
+    seen[i] = 1;
+    while (q.length) {
+      const j = q.pop();
+      comp.push(j);
+      for (const k of nb4(j)) if (clear(k) && !outside[k] && !seen[k]) { seen[k] = 1; q.push(k); }
+    }
+    if (comp.length > max) continue;
+    if (color) {
+      const base = rgb(color);
+      const edge = shade ? rgb(shade) : base;
+      filled += paint(comp.map((j) => [j, nb4(j).some((k) => !clear(k)) ? edge : base]));
+      continue;
+    }
+    let todo = comp;
+    while (todo.length) {
+      const next = [];
+      const writes = [];
+      for (const j of todo) {
+        const x = j % W, y = (j / W) | 0;
+        const acc = [0, 0, 0];
+        let n = 0;
+        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+          const xx = x + dx, yy = y + dy;
+          if ((dx || dy) && xx >= 0 && yy >= 0 && xx < W && yy < H && !clear(yy * W + xx)) {
+            const k = (yy * W + xx) * 4;
+            acc[0] += c.data[k]; acc[1] += c.data[k + 1]; acc[2] += c.data[k + 2];
+            n++;
+          }
+        }
+        if (n) writes.push([j, acc.map((v) => Math.round((v / n) * 0.85))]);
+        else next.push(j);
+      }
+      if (!writes.length) break;
+      filled += paint(writes);
+      todo = next;
+    }
+  }
+  return filled;
+}
+
+/** Per-sprite cleanup settings: { "fillHoles": { "prop_van": 400, "crop_*": 40, "char_claire": { "max": 40, "rows": [31, 65], "color": "#E77287" } } }. */
+const fixesFile = path.join(root, 'assets/art-fixes.json');
+const FIXES = fs.existsSync(fixesFile) ? JSON.parse(fs.readFileSync(fixesFile, 'utf8')) : {};
+function fixFor(kind, id) {
+  const table = FIXES[kind] ?? {};
+  if (id in table) return table[id];
+  const glob = Object.keys(table).find((k) => k.endsWith('*') && id.startsWith(k.slice(0, -1)));
+  return glob ? table[glob] : undefined;
+}
+
 function bbox(c) {
   let x0 = c.w, y0 = c.h, x1 = -1, y1 = -1;
   for (let y = 0; y < c.h; y++) for (let x = 0; x < c.w; x++) if (c.data[(y * c.w + x) * 4 + 3] > 0) {
@@ -139,6 +274,12 @@ function cropCanvas(src, [x, y, w, h]) {
 function writeNative(e, src, frame, warnings, label) {
   const fringe = keyOut(src);
   if (fringe > 20) warnings.push(`${label}: ${fringe} pinkish anti-aliased pixels survived the magenta key`);
+  defringe(src);
+  const holeFix = fixFor('fillHoles', e.id);
+  if (holeFix) {
+    const n = fillHoles(src, holeFix);
+    if (n) console.log(`  ${label}: filled ${n} see-through pixel(s) inside the sprite`);
+  }
   const box = bbox(src);
   if (!box) {
     warnings.push(`${label}: image is empty after keying`);
@@ -180,6 +321,7 @@ function runMap(manifest) {
     const file = findSource(m.src);
     if (!e) { warnings.push(`${m.src}: no manifest id "${m.id}"`); continue; }
     if (!file) { warnings.push(`${m.src}: source not found in ${inbox}`); continue; }
+    if (FIXES.skip?.[m.id]) { console.log(`skip ${m.src}: ${FIXES.skip[m.id]}`); continue; }
     let src = decode(file);
     if (m.crop) src = cropCanvas(src, m.crop);
     const label = `${m.src} as ${m.id}${m.frame !== undefined ? ` frame ${m.frame}` : ''}`;
@@ -219,6 +361,7 @@ function main() {
     const m = /^(.*)_f(\d)$/.exec(base);
     const id = m && manifest.has(m[1]) ? m[1] : base;
     if (!manifest.has(id)) { unknown.push(f); continue; }
+    if (FIXES.skip?.[id]) { console.log(`skip ${f}: ${FIXES.skip[id]}`); continue; }
     const g = groups.get(id) ?? [];
     g[m && manifest.has(m[1]) ? Number(m[2]) : 0] = path.join(inbox, f);
     groups.set(id, g);

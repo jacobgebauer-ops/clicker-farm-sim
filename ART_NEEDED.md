@@ -1,6 +1,6 @@
 # Sprites still needed
 
-Generated from `assets/manifest.json` by `npm run art:needed`. 436 images to go; 31 slots already have final art. The same list, with prompts, is in `assets/art-needed.csv` for uploading.
+Generated from `assets/manifest.json` by `npm run art:needed`. 344 images to go; 90 slots already have final art. The same list, with prompts, is in `assets/art-needed.csv` for uploading.
 
 ## Master prompt for Grok Build
 
@@ -12,7 +12,7 @@ You are making pixel art sprites for "Selleck Homestead", a cozy farm game. The 
 The attached CSV lists every sprite still needed. For each row where priority is 1:
 1. Generate one image from the "prompt" column. One sprite per image, centered, on a solid magenta #FF00FF background (tiles fill the whole square instead).
 2. Keep the framing close to the "shape" column (square, wide, or tall).
-3. Cut the magenta background out to transparency, trim to the sprite, and save it as a PNG named exactly as in the "file" column. Do not rename files.
+3. Leave the solid magenta background in place; do not cut it out or make it transparent (background removal tends to erase pink, red, and purple parts of the sprite, and the game's own tools remove the exact magenta cleanly). Save each image as a PNG named exactly as in the "file" column. Do not rename files.
 4. Keep every sprite at the same pixel scale as the reference sprites, so a cow, a hen, and a barn look right next to each other.
 
 Put all the PNGs in one folder called sprites, add a contact sheet image showing them together, and give me the folder as a zip. If a row is unclear, make your best guess rather than skipping it.
@@ -29,216 +29,17 @@ Tips:
 
 - Save each image with the exact **file name** below (PNG). Then they drop in with no renaming:
   `npm run art:process -- <folder> --native`
-- Transparent background, or solid magenta `#FF00FF`. One sprite per image, centered, nothing else in frame.
+- Solid magenta `#FF00FF` background, left in place (no background removal: it erases pinks and reds inside the sprite). One sprite per image, centered, nothing else in frame.
 - Any resolution is fine (the game fits art to its spot), but keep the **shape** close to what is listed. Match the style of the first batch: 16-bit pixel art, 3/4 top-down, dark plum outlines.
 - Tiles marked "seamless" must tile edge to edge.
 - Items marked GRAYSCALE are recolored by the game; draw them in grays only.
 
-## Priority 1: seen on every visit (93)
+## Priority 1: seen on every visit (1)
 
-### Ground tiles (16)
+### Ground tiles (1)
 
-- **`tile_grass.png`** (square): grass ground tile, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of short bright green grass, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_grass_dark.png`** (square): darker grass tile, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of slightly darker green grass, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_meadow.png`** (square): meadow grass with tiny flowers, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of meadow grass with tiny white and yellow flowers, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_soil.png`** (square): tilled garden soil with furrows, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of tilled garden soil with neat furrows, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_soil_wet.png`** (square): watered (darker) tilled soil, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of freshly watered tilled soil (darker and a little shiny), viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_path.png`** (square): dirt path, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of a packed dirt path, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_gravel.png`** (square): gravel, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of gravel, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_water.png`** (square): creek water, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of clear creek water with small ripples, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_woods_floor.png`** (square): forest floor with needles and moss, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of forest floor with fir needles and moss, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_bramble.png`** (square): overgrown blackberry bramble ground, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of overgrown Himalayan blackberry brambles with thorny canes and dark berries, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_bramble_dense.png`** (square): very dense bramble ground, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of very dense blackberry brambles with almost no ground showing, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_fence_h.png`** (square): horizontal fence segment (transparent background)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a short horizontal section of rustic wooden fence, matching the wooden fence sprite. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`tile_fence_v.png`** (square): vertical fence segment seen from above (transparent background)
+- **`tile_fence_v.png`** (square): fence running up and down the screen, seen from the 3/4 top-down view: one wooden post at the bottom center with the rails running straight up from it toward the top edge, so stacked pieces form a continuous vertical fence line (not a side-on fence)
   > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a short vertical section of rustic wooden fence, matching the wooden fence sprite. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`tile_sand.png`** (square): beach sand, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of warm beach sand, viewed straight down, filling the whole square edge to edge with no border. Square image.
-- **`tile_snow_patch.png`** (square): patch of snow (transparent edges)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a soft irregular patch of snow on the ground, viewed from above. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`tile_creek_bank.png`** (square): muddy, grassy creek bank, seamless
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a seamless, tileable ground texture of a muddy, grassy creek bank, viewed straight down, filling the whole square edge to edge with no border. Square image.
-
-### Crops: ready to harvest (33)
-
-- **`crop_radish_f3.png`** (square): Radish, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a radish plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_peas_f3.png`** (square): Snap Peas, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a snap peas plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_lettuce_f3.png`** (square): Butter Lettuce, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a butter lettuce plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_rhubarb_f3.png`** (square): Rhubarb, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a rhubarb plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_asparagus_f3.png`** (square): Asparagus, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a asparagus plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_tulip_f3.png`** (square): Tulip, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a tulip plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_green_beans_f3.png`** (square): Green Beans, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a green beans plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_zucchini_f3.png`** (square): Zucchini, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a zucchini plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_tomato_f3.png`** (square): Tomato, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a tomato plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_sweet_corn_f3.png`** (square): Sweet Corn, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a sweet corn plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_blueberry_f3.png`** (square): Blueberry, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a blueberry plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_raspberry_f3.png`** (square): Raspberry, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a raspberry plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_loganberry_f3.png`** (square): Loganberry, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a loganberry plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_sunflower_f3.png`** (square): Sunflower, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a sunflower plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_pear_f3.png`** (square): Pear, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a pear plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_plum_f3.png`** (square): Plum, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a plum plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_potato_f3.png`** (square): Potato, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a potato plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_kale_f3.png`** (square): Kale, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a kale plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_brussels_sprouts_f3.png`** (square): Brussels Sprouts, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a brussels sprouts plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_blackberry_f3.png`** (square): Blackberry, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a blackberry plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_indian_corn_f3.png`** (square): Indian Corn, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a indian corn plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_winter_squash_f3.png`** (square): Winter Squash, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a winter squash plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_cabbage_f3.png`** (square): Cabbage, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a cabbage plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_leek_f3.png`** (square): Leek, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a leek plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_garlic_f3.png`** (square): Garlic, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a garlic plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_hardy_kale_f3.png`** (square): Hardy Kale, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a hardy kale plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_holly_f3.png`** (square): Holly, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a holly plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_evergreen_boughs_f3.png`** (square): Evergreen Boughs, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a evergreen boughs plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_greenhouse_herbs_f3.png`** (square): Greenhouse Herbs, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a greenhouse herbs plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_watercress_f3.png`** (square): Watercress, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a watercress plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_cranberry_f3.png`** (square): Cranberry, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a cranberry plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_cherry_f3.png`** (square): Cherry, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a cherry plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`crop_quince_f3.png`** (square): Quince, fully grown and ready to harvest (on a small soil patch)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a quince plant fully grown and ready to harvest, growing from a small diamond-shaped patch of tilled soil (same framing as the pumpkin and strawberry sprites). Single sprite centered on a solid magenta #FF00FF background, square framing.
-
-### Buildings: restored (6)
-
-- **`bld_kitchen_restored.png`** (tall 1:1.25): Summer Kitchen: restored
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a small summer kitchen cottage with a brick chimney and a window box, freshly restored, bright and welcoming, same 3/4 angle as the barn and farmhouse. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.25 framing.
-- **`bld_market_stall_restored.png`** (tall 1:1.25): Market Stall: restored
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a farmers market stall with a purple and white striped canopy and a wooden counter, freshly restored, bright and welcoming, same 3/4 angle as the barn and farmhouse. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.25 framing.
-- **`bld_honor_box_restored.png`** (tall 1:1.5): Honor Box Stand: restored
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a tiny roadside farm stand with a little wooden coin box and a hand-painted sign, freshly restored, bright and welcoming, same 3/4 angle as the barn and farmhouse. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.5 framing.
-- **`bld_winery_restored.png`** (wide 1.2:1): Old Winery: restored
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): an old stone and timber winery with purple trim, a round door, and oak barrels by the entrance, freshly restored, bright and welcoming, same 3/4 angle as the barn and farmhouse. Single sprite centered on a solid magenta #FF00FF background, wide 1.2:1 framing.
-- **`bld_hive_restored.png`** (tall 1:1.5): Bee Garden: restored
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): three white wooden beehives on a small stand with a few flowers, freshly restored, bright and welcoming, same 3/4 angle as the barn and farmhouse. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.5 framing.
-- **`bld_county_fair_restored.png`** (wide 1.2:1): County Fair Tent: restored
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): a red and white striped county fair tent with pennant flags, freshly restored, bright and welcoming, same 3/4 angle as the barn and farmhouse. Single sprite centered on a solid magenta #FF00FF background, wide 1.2:1 framing.
-
-### Characters and animals (9)
-
-- **`anim_rooster.png`** (square): rooster, colorful tail
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): rooster, colorful tail. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`luna_sleep.png`** (wide 1.33:1): Luna curled up asleep (old black cat)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Luna curled up asleep (old black cat). Single sprite centered on a solid magenta #FF00FF background, wide 1.33:1 framing.
-- **`luna_walk.png`** (wide 1.33:1): Luna walking, side view (up to 4 frames)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Luna walking, side view (up to 4 frames). Single sprite centered on a solid magenta #FF00FF background, wide 1.33:1 framing.
-- **`char_claire.png`** (tall 1:1.5): Claire, warm slightly bossy cafe owner, blonde bob, pink blouse, white apron
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Claire, warm slightly bossy cafe owner, blonde bob, pink blouse, white apron, full body, standing, front 3/4 view, same style and scale as the Luke sprite. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.5 framing.
-- **`char_andrew.png`** (tall 1:1.5): Andrew, gruff friendly store owner, gray beard, red flannel, suspenders
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Andrew, gruff friendly store owner, gray beard, red flannel, suspenders, full body, standing, front 3/4 view, same style and scale as the Luke sprite. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.5 framing.
-- **`char_tourist.png`** (tall 1:1.5): city tourist, sun hat, camera, turquoise shirt
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): city tourist, sun hat, camera, turquoise shirt, full body, standing, front 3/4 view, same style and scale as the Luke sprite. Single sprite centered on a solid magenta #FF00FF background, tall 1:1.5 framing.
-- **`portrait_claire.png`** (square): Claire head and shoulders
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Claire head and shoulders, friendly expression, framed like the Luke portrait. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`portrait_andrew.png`** (square): Andrew head and shoulders
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Andrew head and shoulders, friendly expression, framed like the Luke portrait. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`portrait_rachel.png`** (square): Rachel head and shoulders (long brown hair, purple overalls, straw sun hat)
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Rachel head and shoulders (long brown hair, purple overalls, straw sun hat), friendly expression, framed like the Luke portrait. Single sprite centered on a solid magenta #FF00FF background, square framing.
-
-### Farm props (8)
-
-- **`prop_bush.png`** (square): round green bush
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): round green bush. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`prop_rock.png`** (wide 1.33:1): mossy rock
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): mossy rock. Single sprite centered on a solid magenta #FF00FF background, wide 1.33:1 framing.
-- **`prop_mailbox.png`** (tall 1:2): purple farm mailbox on a post
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): purple farm mailbox on a post. Single sprite centered on a solid magenta #FF00FF background, tall 1:2 framing.
-- **`prop_van.png`** (wide 1.6:1): Claire's pink cafe delivery van
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): Claire's pink cafe delivery van. Single sprite centered on a solid magenta #FF00FF background, wide 1.6:1 framing.
-- **`prop_sign.png`** (square): wooden signpost
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): wooden signpost. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`prop_stump.png`** (wide 1.33:1): tree stump
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): tree stump. Single sprite centered on a solid magenta #FF00FF background, wide 1.33:1 framing.
-- **`prop_haystack.png`** (square): haystack
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): haystack. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`prop_lamp.png`** (tall 1:3): old lamp post
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): old lamp post. Single sprite centered on a solid magenta #FF00FF background, tall 1:3 framing.
-
-### UI icons (21)
-
-- **`ui_coin.png`** (square): gold coin
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): gold coin. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_ribbon.png`** (square): blue prize ribbon rosette
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): blue prize ribbon rosette. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_heirloom_seed.png`** (square): golden heirloom seed
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): golden heirloom seed. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_star.png`** (square): yellow star
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): yellow star. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_star_empty.png`** (square): empty (gray) star
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): empty (gray) star. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_heart.png`** (square): red heart
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): red heart. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_xp.png`** (square): XP badge
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): XP badge. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_clock.png`** (square): clock
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): clock. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_lock.png`** (square): padlock
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): padlock. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_check.png`** (square): green check mark
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): green check mark. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_luke_button.png`** (square): round blue "?" button
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): round blue "?" button. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_collect_all.png`** (square): harvest basket full of produce
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): harvest basket full of produce. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_tab_farm.png`** (square): tab icon: little garden bed
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): tab icon: little garden bed. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_tab_craft.png`** (square): tab icon: cooking pot
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): tab icon: cooking pot. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_tab_shops.png`** (square): tab icon: shop stall
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): tab icon: shop stall. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_tab_style.png`** (square): tab icon: hat
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): tab icon: hat. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_tab_menu.png`** (square): tab icon: book
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): tab icon: book. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_basket.png`** (square): gift basket
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): gift basket. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_almanac.png`** (square): farmers almanac book
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): farmers almanac book. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_journal.png`** (square): season journal book
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): season journal book. Single sprite centered on a solid magenta #FF00FF background, square framing.
-- **`ui_chalkboard.png`** (square): cafe chalkboard
-  > 16-bit SNES-era pixel art, cozy farm game, matching the existing sprites (dark plum #2B1B3D outlines, bright cheerful colors, crisp pixels, no anti-aliasing, no text): cafe chalkboard. Single sprite centered on a solid magenta #FF00FF background, square framing.
 
 ## Priority 2: shops, inventory, and collections (166)
 

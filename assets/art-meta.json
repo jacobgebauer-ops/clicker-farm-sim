@@ -5,5 +5,7 @@
   "anim_hen": { "headAnchor": [9, 38], "facing": "left" },
   "anim_chick": { "headAnchor": [24, 4], "facing": "right" },
   "char_luke": { "facing": "right" },
-  "luna_sit": { "facing": "left" }
+  "luna_sit": { "facing": "left" },
+  "anim_rooster": { "headAnchor": [12, 6], "facing": "left" },
+  "luna_walk": { "facing": "right" }
 }
