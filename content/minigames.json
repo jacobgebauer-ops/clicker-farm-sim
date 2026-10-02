@@ -1,0 +1,5 @@
+[
+  {"id": "milk_rhythm", "name": "Milk Rhythm", "building": "barn", "blurb": "Tap to the beat as notes fall into the pails.", "howTo": "Tap a lane when a note reaches the pail line. Keep a streak going!"},
+  {"id": "egg_catch", "name": "Egg Catch", "building": "coop", "blurb": "Catch falling eggs in your basket. Dodge boots!", "howTo": "Drag the basket left and right. Golden eggs are worth extra. Boots and feathers break your streak."},
+  {"id": "weed_pull", "name": "Weed Pull", "building": "greenhouse", "blurb": "Pull weeds before they spread. Don't tap the crops. Definitely don't tap Luna.", "howTo": "Tap or swipe weeds to pull them. Leave the crops alone, and let Luna walk by in peace."}
+]

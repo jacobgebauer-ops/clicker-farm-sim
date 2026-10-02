@@ -1,0 +1,15 @@
+{
+  "templates": [
+    {"id": "w_harvest", "text": "Harvest {n} crops", "stat": "harvest", "min": 10, "max": 25, "ribbons": 1},
+    {"id": "w_plant", "text": "Plant {n} seeds", "stat": "plant", "min": 8, "max": 20, "ribbons": 1},
+    {"id": "w_tend", "text": "Tend crops {n} times", "stat": "tend", "min": 5, "max": 15, "ribbons": 1},
+    {"id": "w_orders", "text": "Fill {n} of Claire's orders", "stat": "orderFill", "min": 1, "max": 3, "ribbons": 1},
+    {"id": "w_eggs", "text": "Collect {n} eggs", "stat": "collect", "id2": "egg", "min": 3, "max": 8, "ribbons": 1, "needs": "coop"},
+    {"id": "w_milk", "text": "Collect {n} milk", "stat": "collect", "id2": "milk", "min": 1, "max": 4, "ribbons": 1, "needs": "barn"},
+    {"id": "w_craft", "text": "Cook {n} things in the kitchen", "stat": "craft", "min": 1, "max": 3, "ribbons": 1, "needs": "kitchen"},
+    {"id": "w_minigame", "text": "Play {n} mini game", "stat": "minigame", "min": 1, "max": 1, "ribbons": 1, "needs": "coop"},
+    {"id": "w_luna", "text": "Pet Luna {n} times", "stat": "lunaTap", "min": 2, "max": 5, "ribbons": 1},
+    {"id": "w_brush", "text": "Brush cows {n} times", "stat": "brush", "min": 1, "max": 3, "ribbons": 1, "needs": "barn"},
+    {"id": "w_sell", "text": "Sell {n} items at the farm stand or market", "stat": "sell", "min": 10, "max": 30, "ribbons": 1}
+  ]
+}

@@ -1,0 +1,782 @@
+{
+ "schemaVersion": 3,
+ "createdAt": 1791277200000,
+ "lastSeen": 1791277320000,
+ "coins": 4779,
+ "ribbons": 0,
+ "heirloomSeeds": 0,
+ "xp": 37,
+ "lifetimeCoins": 20,
+ "yearCoins": 20,
+ "yearAchievements": 0,
+ "farmYear": 1,
+ "inventory": {
+  "mystery_crop_from_v9": 3
+ },
+ "parcels": {
+  "selleck_woods": "overgrown",
+  "north_field": "overgrown",
+  "creek_bottom": "overgrown",
+  "barn_pasture": "overgrown",
+  "homestead": "cleared",
+  "coop_orchard": "cleared",
+  "vineyard": "overgrown",
+  "south_field": "overgrown",
+  "roadside": "overgrown"
+ },
+ "buildings": {
+  "farmhouse": {
+   "stage": 0,
+   "level": 0
+  },
+  "kitchen": {
+   "stage": 0,
+   "level": 0
+  },
+  "coop": {
+   "stage": 2,
+   "level": 1,
+   "repairStartedAt": 1791277200000,
+   "producedAt": 1791277320000
+  },
+  "barn": {
+   "stage": 0,
+   "level": 0
+  },
+  "market_stall": {
+   "stage": 0,
+   "level": 0
+  },
+  "honor_box": {
+   "stage": 0,
+   "level": 0
+  },
+  "winery": {
+   "stage": 0,
+   "level": 0
+  },
+  "greenhouse": {
+   "stage": 0,
+   "level": 0
+  },
+  "hive": {
+   "stage": 0,
+   "level": 0
+  },
+  "county_fair": {
+   "stage": 0,
+   "level": 0
+  }
+ },
+ "plots": [
+  {
+   "id": "selleck_woods_0",
+   "parcel": "selleck_woods",
+   "x": 5,
+   "y": 5,
+   "cleared": false
+  },
+  {
+   "id": "selleck_woods_1",
+   "parcel": "selleck_woods",
+   "x": 6,
+   "y": 5,
+   "cleared": false
+  },
+  {
+   "id": "selleck_woods_2",
+   "parcel": "selleck_woods",
+   "x": 5,
+   "y": 6,
+   "cleared": false
+  },
+  {
+   "id": "selleck_woods_3",
+   "parcel": "selleck_woods",
+   "x": 6,
+   "y": 6,
+   "cleared": false
+  },
+  {
+   "id": "north_field_0",
+   "parcel": "north_field",
+   "x": 9,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "north_field_1",
+   "parcel": "north_field",
+   "x": 10,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "north_field_2",
+   "parcel": "north_field",
+   "x": 11,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "north_field_3",
+   "parcel": "north_field",
+   "x": 9,
+   "y": 2,
+   "cleared": false
+  },
+  {
+   "id": "north_field_4",
+   "parcel": "north_field",
+   "x": 10,
+   "y": 2,
+   "cleared": false
+  },
+  {
+   "id": "north_field_5",
+   "parcel": "north_field",
+   "x": 11,
+   "y": 2,
+   "cleared": false
+  },
+  {
+   "id": "north_field_6",
+   "parcel": "north_field",
+   "x": 9,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "north_field_7",
+   "parcel": "north_field",
+   "x": 10,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "north_field_8",
+   "parcel": "north_field",
+   "x": 11,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "north_field_9",
+   "parcel": "north_field",
+   "x": 9,
+   "y": 4,
+   "cleared": false
+  },
+  {
+   "id": "north_field_10",
+   "parcel": "north_field",
+   "x": 10,
+   "y": 4,
+   "cleared": false
+  },
+  {
+   "id": "north_field_11",
+   "parcel": "north_field",
+   "x": 11,
+   "y": 4,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_0",
+   "parcel": "creek_bottom",
+   "x": 17,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_1",
+   "parcel": "creek_bottom",
+   "x": 18,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_2",
+   "parcel": "creek_bottom",
+   "x": 19,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_3",
+   "parcel": "creek_bottom",
+   "x": 20,
+   "y": 1,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_4",
+   "parcel": "creek_bottom",
+   "x": 17,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_5",
+   "parcel": "creek_bottom",
+   "x": 18,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_6",
+   "parcel": "creek_bottom",
+   "x": 19,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "creek_bottom_7",
+   "parcel": "creek_bottom",
+   "x": 20,
+   "y": 3,
+   "cleared": false
+  },
+  {
+   "id": "barn_pasture_0",
+   "parcel": "barn_pasture",
+   "x": 5,
+   "y": 9,
+   "cleared": false
+  },
+  {
+   "id": "barn_pasture_1",
+   "parcel": "barn_pasture",
+   "x": 6,
+   "y": 9,
+   "cleared": false
+  },
+  {
+   "id": "barn_pasture_2",
+   "parcel": "barn_pasture",
+   "x": 5,
+   "y": 10,
+   "cleared": false
+  },
+  {
+   "id": "barn_pasture_3",
+   "parcel": "barn_pasture",
+   "x": 6,
+   "y": 10,
+   "cleared": false
+  },
+  {
+   "id": "homestead_0",
+   "parcel": "homestead",
+   "x": 9,
+   "y": 12,
+   "cleared": true,
+   "crop": "kale",
+   "plantedAt": 1791277200000,
+   "readyAt": 1791277380000,
+   "growMs": 180000,
+   "tendShaved": 0,
+   "tendUntil": 0
+  },
+  {
+   "id": "homestead_1",
+   "parcel": "homestead",
+   "x": 10,
+   "y": 12,
+   "cleared": false
+  },
+  {
+   "id": "homestead_2",
+   "parcel": "homestead",
+   "x": 11,
+   "y": 12,
+   "cleared": false
+  },
+  {
+   "id": "homestead_3",
+   "parcel": "homestead",
+   "x": 9,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "homestead_4",
+   "parcel": "homestead",
+   "x": 10,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "homestead_5",
+   "parcel": "homestead",
+   "x": 11,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "homestead_6",
+   "parcel": "homestead",
+   "x": 9,
+   "y": 14,
+   "cleared": false
+  },
+  {
+   "id": "homestead_7",
+   "parcel": "homestead",
+   "x": 10,
+   "y": 14,
+   "cleared": false
+  },
+  {
+   "id": "homestead_8",
+   "parcel": "homestead",
+   "x": 11,
+   "y": 14,
+   "cleared": false
+  },
+  {
+   "id": "homestead_9",
+   "parcel": "homestead",
+   "x": 12,
+   "y": 14,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_0",
+   "parcel": "coop_orchard",
+   "x": 17,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_1",
+   "parcel": "coop_orchard",
+   "x": 18,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_2",
+   "parcel": "coop_orchard",
+   "x": 19,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_3",
+   "parcel": "coop_orchard",
+   "x": 21,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_4",
+   "parcel": "coop_orchard",
+   "x": 22,
+   "y": 13,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_5",
+   "parcel": "coop_orchard",
+   "x": 21,
+   "y": 14,
+   "cleared": false
+  },
+  {
+   "id": "coop_orchard_6",
+   "parcel": "coop_orchard",
+   "x": 22,
+   "y": 14,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_0",
+   "parcel": "vineyard",
+   "x": 5,
+   "y": 17,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_1",
+   "parcel": "vineyard",
+   "x": 6,
+   "y": 17,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_2",
+   "parcel": "vineyard",
+   "x": 5,
+   "y": 18,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_3",
+   "parcel": "vineyard",
+   "x": 6,
+   "y": 18,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_4",
+   "parcel": "vineyard",
+   "x": 1,
+   "y": 21,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_5",
+   "parcel": "vineyard",
+   "x": 2,
+   "y": 21,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_6",
+   "parcel": "vineyard",
+   "x": 3,
+   "y": 21,
+   "cleared": false
+  },
+  {
+   "id": "vineyard_7",
+   "parcel": "vineyard",
+   "x": 4,
+   "y": 21,
+   "cleared": false
+  },
+  {
+   "id": "south_field_0",
+   "parcel": "south_field",
+   "x": 9,
+   "y": 17,
+   "cleared": false
+  },
+  {
+   "id": "south_field_1",
+   "parcel": "south_field",
+   "x": 10,
+   "y": 17,
+   "cleared": false
+  },
+  {
+   "id": "south_field_2",
+   "parcel": "south_field",
+   "x": 11,
+   "y": 17,
+   "cleared": false
+  },
+  {
+   "id": "south_field_3",
+   "parcel": "south_field",
+   "x": 12,
+   "y": 17,
+   "cleared": false
+  },
+  {
+   "id": "south_field_4",
+   "parcel": "south_field",
+   "x": 9,
+   "y": 18,
+   "cleared": false
+  },
+  {
+   "id": "south_field_5",
+   "parcel": "south_field",
+   "x": 10,
+   "y": 18,
+   "cleared": false
+  },
+  {
+   "id": "south_field_6",
+   "parcel": "south_field",
+   "x": 11,
+   "y": 18,
+   "cleared": false
+  },
+  {
+   "id": "south_field_7",
+   "parcel": "south_field",
+   "x": 12,
+   "y": 18,
+   "cleared": false
+  },
+  {
+   "id": "south_field_8",
+   "parcel": "south_field",
+   "x": 9,
+   "y": 19,
+   "cleared": false
+  },
+  {
+   "id": "south_field_9",
+   "parcel": "south_field",
+   "x": 10,
+   "y": 19,
+   "cleared": false
+  },
+  {
+   "id": "south_field_10",
+   "parcel": "south_field",
+   "x": 11,
+   "y": 19,
+   "cleared": false
+  },
+  {
+   "id": "south_field_11",
+   "parcel": "south_field",
+   "x": 12,
+   "y": 19,
+   "cleared": false
+  },
+  {
+   "id": "south_field_12",
+   "parcel": "south_field",
+   "x": 9,
+   "y": 20,
+   "cleared": false
+  },
+  {
+   "id": "south_field_13",
+   "parcel": "south_field",
+   "x": 10,
+   "y": 20,
+   "cleared": false
+  },
+  {
+   "id": "south_field_14",
+   "parcel": "south_field",
+   "x": 11,
+   "y": 20,
+   "cleared": false
+  },
+  {
+   "id": "south_field_15",
+   "parcel": "south_field",
+   "x": 12,
+   "y": 20,
+   "cleared": false
+  },
+  {
+   "id": "roadside_0",
+   "parcel": "roadside",
+   "x": 16,
+   "y": 22,
+   "cleared": false
+  },
+  {
+   "id": "roadside_1",
+   "parcel": "roadside",
+   "x": 17,
+   "y": 22,
+   "cleared": false
+  }
+ ],
+ "animals": [],
+ "kitchen": {
+  "jobs": []
+ },
+ "winery": {
+  "batches": []
+ },
+ "cellarLog": [],
+ "wineNames": {},
+ "claire": {
+  "friendship": 0,
+  "slots": [
+   {
+    "refillAt": 0,
+    "order": {
+     "id": "ord2",
+     "items": [
+      {
+       "id": "kale",
+       "qty": 2
+      }
+     ],
+     "coins": 8,
+     "xp": 6,
+     "ribbon": false,
+     "createdAt": 1791277200000,
+     "fastUntil": 1791278400000
+    }
+   },
+   {
+    "refillAt": 0,
+    "order": {
+     "id": "ord3",
+     "items": [
+      {
+       "id": "indian_corn",
+       "qty": 1
+      }
+     ],
+     "coins": 130,
+     "xp": 36,
+     "ribbon": false,
+     "createdAt": 1791277200000,
+     "fastUntil": 1791278400000
+    }
+   },
+   {
+    "refillAt": 0,
+    "order": {
+     "id": "ord4",
+     "items": [
+      {
+       "id": "pear",
+       "qty": 1
+      }
+     ],
+     "coins": 238,
+     "xp": 66,
+     "ribbon": false,
+     "createdAt": 1791277200000,
+     "fastUntil": 1791278400000
+    }
+   }
+  ],
+  "counter": 3
+ },
+ "market": {
+  "day": "2026-10-06",
+  "sold": {},
+  "distinct": [],
+  "dayCoins": 0,
+  "weeks": {},
+  "recapSeen": -1
+ },
+ "almanacLevel": 1,
+ "journal": {
+  "week": 0,
+  "points": 0,
+  "claimed": 0,
+  "cycles": {}
+ },
+ "wishes": {
+  "day": "2026-10-06",
+  "list": [
+   {
+    "tid": "w_orders",
+    "stat": "orderFill",
+    "target": 2,
+    "base": 0,
+    "ribbons": 1,
+    "done": false
+   },
+   {
+    "tid": "w_harvest",
+    "stat": "harvest",
+    "target": 15,
+    "base": 0,
+    "ribbons": 1,
+    "done": false
+   },
+   {
+    "tid": "w_sell",
+    "stat": "sell",
+    "target": 25,
+    "base": 0,
+    "ribbons": 1,
+    "done": false
+   }
+  ]
+ },
+ "daily": {
+  "streak": 0
+ },
+ "quests": {
+  "done": [
+   "q_welcome"
+  ]
+ },
+ "stats": {
+  "clearPlot": 1,
+  "plant": 1,
+  "plant:kale": 1,
+  "parcelClear": 1,
+  "parcelClear:coop_orchard": 1,
+  "buy": 5,
+  "buy:lumber": 5,
+  "repairStart": 1,
+  "repairStart:coop": 1,
+  "repair": 1,
+  "repair:coop": 1,
+  "coinsEarned": 20
+ },
+ "achievements": [],
+ "codex": {
+  "crops": [],
+  "wines": [],
+  "recipes": [],
+  "lunaSpots": [],
+  "lunaGifts": [],
+  "claimed": []
+ },
+ "owned": {
+  "cosmetics": [
+   "av_hat_none",
+   "av_hat_sun",
+   "av_hair_long",
+   "av_hair_bob",
+   "av_hair_bun",
+   "av_hair_braid",
+   "av_hair_ponytail",
+   "av_hair_curls",
+   "av_outfit_overalls",
+   "av_outfit_flannel",
+   "av_outfit_sundress",
+   "av_outfit_sweater",
+   "av_acc_none",
+   "label_classic",
+   "paint_classic_red",
+   "roof_slate"
+  ],
+  "decor": {}
+ },
+ "placed": [],
+ "layouts": {},
+ "avatar": {
+  "hair": "av_hair_long",
+  "outfit": "av_outfit_overalls",
+  "hat": "av_hat_sun",
+  "acc": "av_acc_none",
+  "skin": "#F1C7A5",
+  "hairColor": "#7A4A2A",
+  "outfitColor": "#7B4FB5"
+ },
+ "recipesUnlocked": [],
+ "minigames": {
+  "cooldown": {},
+  "best": {}
+ },
+ "heirloom": {},
+ "flags": [],
+ "luna": {
+  "moments": 0
+ },
+ "lastWeek": 0,
+ "forcedSeason": null,
+ "pendingRollover": null,
+ "pendingAway": null,
+ "settings": {
+  "music": 0.5,
+  "sfx": 0.7,
+  "mute": false,
+  "reduceMotion": false,
+  "haptics": true,
+  "numberFormat": "short"
+ },
+ "tutorial": {
+  "done": false,
+  "skipped": false
+ },
+ "seenChangelog": "",
+ "dedicationSeen": false,
+ "lastBackupPrompt": 1791277200000,
+ "easterEggsSeen": [],
+ "decorTaps": {},
+ "uid": 4,
+ "lastSeed": "kale"
+}

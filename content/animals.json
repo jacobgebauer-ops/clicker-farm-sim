@@ -1,0 +1,6 @@
+[
+  {"id": "highland_cow", "name": "Highland Cow", "kind": "cow", "product": "milk", "everyMin": 120, "cap": 3, "buyCost": 900, "headAnchor": [38, 9], "hornSpan": 22},
+  {"id": "hen", "name": "Hen", "kind": "chicken", "product": "egg", "everyMin": 30, "cap": 4, "buyCost": 80, "headAnchor": [16, 5]},
+  {"id": "rooster", "name": "Rooster", "kind": "chicken", "product": null, "everyMin": 60, "cap": 1, "buyCost": 150, "headAnchor": [16, 3]},
+  {"id": "chick", "name": "Chick", "kind": "chicken", "product": null, "everyMin": 60, "cap": 1, "buyCost": 30, "growsInto": "hen", "growMin": 1440, "headAnchor": [8, 4]}
+]

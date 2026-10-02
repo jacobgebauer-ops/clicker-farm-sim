@@ -1,0 +1,199 @@
+[
+  {
+    "id": "selleck_woods",
+    "name": "Selleck Woods",
+    "gx": 0,
+    "gy": 0,
+    "role": "woods",
+    "start": "overgrown",
+    "ground": "woods",
+    "clear": {"coins": 300000, "materials": [{"id": "lumber", "qty": 60},{"id": "nails", "qty": 40}]},
+    "restore": {"coins": 3000000, "materials": [{"id": "fencing", "qty": 120},{"id": "paint", "qty": 60},{"id": "lumber", "qty": 150}]},
+    "plots": [
+      {"x": 5, "y": 5, "cost": 40000, "needs": "cleared"},
+      {"x": 6, "y": 5, "cost": 58000, "needs": "cleared"},
+      {"x": 5, "y": 6, "cost": 252300, "needs": "restored"},
+      {"x": 6, "y": 6, "cost": 365840, "needs": "restored"}
+    ],
+    "blurb": "Tall firs, ferns, and a quiet spot where the bees would be happy."
+  },
+  {
+    "id": "north_field",
+    "name": "North Field",
+    "gx": 1,
+    "gy": 0,
+    "role": "field",
+    "start": "overgrown",
+    "ground": "meadow",
+    "clear": {"coins": 4000, "materials": [{"id": "lumber", "qty": 10}]},
+    "restore": {"coins": 250000, "materials": [{"id": "fencing", "qty": 40},{"id": "lumber", "qty": 30},{"id": "nails", "qty": 30}]},
+    "plots": [
+      {"x": 1, "y": 1, "cost": 800, "needs": "cleared"},
+      {"x": 2, "y": 1, "cost": 1160, "needs": "cleared"},
+      {"x": 3, "y": 1, "cost": 1680, "needs": "cleared"},
+      {"x": 1, "y": 2, "cost": 2440, "needs": "cleared"},
+      {"x": 2, "y": 2, "cost": 3540, "needs": "cleared"},
+      {"x": 3, "y": 2, "cost": 5130, "needs": "cleared"},
+      {"x": 1, "y": 3, "cost": 22310, "needs": "restored"},
+      {"x": 2, "y": 3, "cost": 32340, "needs": "restored"},
+      {"x": 3, "y": 3, "cost": 46900, "needs": "restored"},
+      {"x": 1, "y": 4, "cost": 68000, "needs": "restored"},
+      {"x": 2, "y": 4, "cost": 98600, "needs": "restored"},
+      {"x": 3, "y": 4, "cost": 142970, "needs": "restored"}
+    ],
+    "blurb": "Wide open ground for long crops. The greenhouse frame is still standing."
+  },
+  {
+    "id": "creek_bottom",
+    "name": "Creek Bottom",
+    "gx": 2,
+    "gy": 0,
+    "role": "creek",
+    "start": "overgrown",
+    "ground": "creek",
+    "clear": {"coins": 120000, "materials": [{"id": "lumber", "qty": 40},{"id": "nails", "qty": 30}]},
+    "restore": {"coins": 1800000, "materials": [{"id": "fencing", "qty": 90},{"id": "paint", "qty": 40},{"id": "lumber", "qty": 90}]},
+    "plots": [
+      {"x": 1, "y": 1, "cost": 15000, "needs": "cleared"},
+      {"x": 2, "y": 1, "cost": 21750, "needs": "cleared"},
+      {"x": 3, "y": 1, "cost": 31540, "needs": "cleared"},
+      {"x": 4, "y": 1, "cost": 45730, "needs": "cleared"},
+      {"x": 1, "y": 3, "cost": 198920, "needs": "restored"},
+      {"x": 2, "y": 3, "cost": 288440, "needs": "restored"},
+      {"x": 3, "y": 3, "cost": 418240, "needs": "restored"},
+      {"x": 4, "y": 3, "cost": 606440, "needs": "restored"}
+    ],
+    "blurb": "Rich soil along the creek. Watch out for frogs with opinions."
+  },
+  {
+    "id": "barn_pasture",
+    "name": "Barn and Pasture",
+    "gx": 0,
+    "gy": 1,
+    "role": "barn",
+    "start": "overgrown",
+    "ground": "meadow",
+    "clear": {"coins": 200, "materials": [{"id": "lumber", "qty": 5}]},
+    "restore": {"coins": 35000, "materials": [{"id": "fencing", "qty": 20},{"id": "lumber", "qty": 20},{"id": "paint", "qty": 5}]},
+    "plots": [
+      {"x": 5, "y": 1, "cost": 400, "needs": "cleared"},
+      {"x": 6, "y": 1, "cost": 580, "needs": "cleared"},
+      {"x": 5, "y": 2, "cost": 2520, "needs": "restored"},
+      {"x": 6, "y": 2, "cost": 3660, "needs": "restored"}
+    ],
+    "blurb": "Where the Highland cows will graze. The old barn needs a lot of love."
+  },
+  {
+    "id": "homestead",
+    "name": "Homestead",
+    "gx": 1,
+    "gy": 1,
+    "role": "homestead",
+    "start": "cleared",
+    "ground": "grass",
+    "clear": {"coins": 0, "materials": []},
+    "restore": {"coins": 3000, "materials": [{"id": "fencing", "qty": 10},{"id": "paint", "qty": 4},{"id": "lumber", "qty": 10}]},
+    "plots": [
+      {"x": 1, "y": 4, "cost": 0, "needs": "cleared"},
+      {"x": 2, "y": 4, "cost": 0, "needs": "cleared"},
+      {"x": 3, "y": 4, "cost": 0, "needs": "cleared"},
+      {"x": 1, "y": 5, "cost": 120, "needs": "cleared"},
+      {"x": 2, "y": 5, "cost": 180, "needs": "cleared"},
+      {"x": 3, "y": 5, "cost": 260, "needs": "cleared"},
+      {"x": 1, "y": 6, "cost": 1120, "needs": "restored"},
+      {"x": 2, "y": 6, "cost": 1620, "needs": "restored"},
+      {"x": 3, "y": 6, "cost": 2340, "needs": "restored"},
+      {"x": 4, "y": 6, "cost": 3400, "needs": "restored"}
+    ],
+    "blurb": "The farmhouse, the garden, and Luna's favorite porch."
+  },
+  {
+    "id": "coop_orchard",
+    "name": "Coop and Orchard",
+    "gx": 2,
+    "gy": 1,
+    "role": "coop",
+    "start": "overgrown",
+    "ground": "grass",
+    "clear": {"coins": 60, "materials": []},
+    "restore": {"coins": 12000, "materials": [{"id": "fencing", "qty": 12},{"id": "lumber", "qty": 10}]},
+    "plots": [
+      {"x": 1, "y": 5, "cost": 150, "needs": "cleared"},
+      {"x": 2, "y": 5, "cost": 220, "needs": "cleared"},
+      {"x": 3, "y": 5, "cost": 320, "needs": "cleared"},
+      {"x": 5, "y": 5, "cost": 1370, "needs": "restored"},
+      {"x": 6, "y": 5, "cost": 1990, "needs": "restored"},
+      {"x": 5, "y": 6, "cost": 2880, "needs": "restored"},
+      {"x": 6, "y": 6, "cost": 4180, "needs": "restored"}
+    ],
+    "blurb": "The hen house and a few gnarled fruit trees."
+  },
+  {
+    "id": "vineyard",
+    "name": "Vineyard and Berry Rows",
+    "gx": 0,
+    "gy": 2,
+    "role": "vineyard",
+    "start": "overgrown",
+    "ground": "grass",
+    "clear": {"coins": 8000, "materials": [{"id": "lumber", "qty": 15}]},
+    "restore": {"coins": 450000, "materials": [{"id": "fencing", "qty": 40},{"id": "lumber", "qty": 40},{"id": "paint", "qty": 15}]},
+    "plots": [
+      {"x": 5, "y": 1, "cost": 2500, "needs": "cleared"},
+      {"x": 6, "y": 1, "cost": 3620, "needs": "cleared"},
+      {"x": 5, "y": 2, "cost": 5260, "needs": "cleared"},
+      {"x": 6, "y": 2, "cost": 7620, "needs": "cleared"},
+      {"x": 1, "y": 5, "cost": 33150, "needs": "restored"},
+      {"x": 2, "y": 5, "cost": 48070, "needs": "restored"},
+      {"x": 3, "y": 5, "cost": 69710, "needs": "restored"},
+      {"x": 4, "y": 5, "cost": 101070, "needs": "restored"}
+    ],
+    "blurb": "Berry rows and the old winery. Grandpa's barrels might still be in there."
+  },
+  {
+    "id": "south_field",
+    "name": "South Field",
+    "gx": 1,
+    "gy": 2,
+    "role": "field",
+    "start": "overgrown",
+    "ground": "meadow",
+    "clear": {"coins": 40000, "materials": [{"id": "lumber", "qty": 20},{"id": "fencing", "qty": 10}]},
+    "restore": {"coins": 900000, "materials": [{"id": "fencing", "qty": 70},{"id": "lumber", "qty": 60},{"id": "nails", "qty": 60}]},
+    "plots": [
+      {"x": 1, "y": 1, "cost": 5000, "needs": "cleared"},
+      {"x": 2, "y": 1, "cost": 7250, "needs": "cleared"},
+      {"x": 3, "y": 1, "cost": 10510, "needs": "cleared"},
+      {"x": 4, "y": 1, "cost": 15240, "needs": "cleared"},
+      {"x": 1, "y": 2, "cost": 22100, "needs": "cleared"},
+      {"x": 2, "y": 2, "cost": 32050, "needs": "cleared"},
+      {"x": 3, "y": 2, "cost": 46470, "needs": "cleared"},
+      {"x": 4, "y": 2, "cost": 67380, "needs": "cleared"},
+      {"x": 1, "y": 3, "cost": 293110, "needs": "restored"},
+      {"x": 2, "y": 3, "cost": 425010, "needs": "restored"},
+      {"x": 3, "y": 3, "cost": 616270, "needs": "restored"},
+      {"x": 4, "y": 3, "cost": 893590, "needs": "restored"},
+      {"x": 1, "y": 4, "cost": 1295710, "needs": "restored"},
+      {"x": 2, "y": 4, "cost": 1878780, "needs": "restored"},
+      {"x": 3, "y": 4, "cost": 2724230, "needs": "restored"},
+      {"x": 4, "y": 4, "cost": 3950130, "needs": "restored"}
+    ],
+    "blurb": "The biggest field on the farm. Room for a serious harvest."
+  },
+  {
+    "id": "roadside",
+    "name": "Roadside",
+    "gx": 2,
+    "gy": 2,
+    "role": "roadside",
+    "start": "overgrown",
+    "ground": "gravel",
+    "clear": {"coins": 700, "materials": [{"id": "lumber", "qty": 6}]},
+    "restore": {"coins": 90000, "materials": [{"id": "paint", "qty": 12},{"id": "fencing", "qty": 16},{"id": "lumber", "qty": 16}]},
+    "plots": [
+      {"x": 0, "y": 6, "cost": 6000, "needs": "restored"},
+      {"x": 1, "y": 6, "cost": 8700, "needs": "restored"}
+    ],
+    "blurb": "Claire's delivery lane, the market stall, and the honor box by the mailbox."
+  }
+]

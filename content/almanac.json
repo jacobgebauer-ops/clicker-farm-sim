@@ -1,0 +1,23 @@
+{
+  "levels": [
+    {"level": 1, "cost": 0, "materials": [], "accuracy": 0.55, "precision": 0, "text": "A water-stained Almanac. The hints are vague and sometimes wrong."},
+    {"level": 2, "cost": 2500, "materials": [{"id": "paint", "qty": 2}], "accuracy": 0.65, "precision": 1, "text": "A few pages glued back in. Hints mention the kind of thing folks want."},
+    {"level": 3, "cost": 12000, "materials": [{"id": "paint", "qty": 4}], "accuracy": 0.75, "precision": 1, "text": "Freshly rebound. Hints are usually right."},
+    {"level": 4, "cost": 45000, "materials": [{"id": "paint", "qty": 6}, {"id": "glass", "qty": 2}], "accuracy": 0.85, "precision": 2, "text": "Annotated in Grandma's handwriting. Hints narrow it down a lot."},
+    {"level": 5, "cost": 150000, "materials": [{"id": "paint", "qty": 10}, {"id": "glass", "qty": 4}], "accuracy": 1, "precision": 3, "text": "The legendary edition. It names the hot items outright."}
+  ],
+  "covers": [
+    {"year": 1, "name": "Weathered Green", "color": "#4F7A4A"},
+    {"year": 2, "name": "Barn Red", "color": "#B33A3A"},
+    {"year": 3, "name": "Royal Plum", "color": "#6E3A8C"},
+    {"year": 4, "name": "Golden Harvest", "color": "#C9A13B"},
+    {"year": 5, "name": "Midnight Blue", "color": "#2F3F7A"}
+  ],
+  "pages": [
+    {"id": "chapter_1", "title": "Year One: Coming Home", "text": "The land is ours again. The brambles have had their turn; now it's ours."},
+    {"id": "chapter_2", "title": "Year Two: Deep Roots", "text": "The farm is whole. This year, it's about making it ours, and making it shine."},
+    {"id": "chapter_3", "title": "Year Three: Blue Ribbons", "text": "The County Fair knows our name now. Grandpa would be proud."},
+    {"id": "chapter_4", "title": "Year Four: Heirlooms", "text": "Seeds saved from our best harvests. Every year a little richer."},
+    {"id": "chapter_5", "title": "Year Five and Beyond", "text": "Every year on the farm is a new chapter. This one is yours to write."}
+  ]
+}

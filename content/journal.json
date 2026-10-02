@@ -1,0 +1,16 @@
+{
+  "tiers": [10, 25, 45, 70, 100, 135, 175, 220, 270, 325, 385, 450, 520, 595, 675, 760, 850, 945, 1045, 1150],
+  "points": {"harvest": 1, "craft": 3, "orderFill": 4, "marketSell": 2, "standSell": 0.5, "minigame": 6, "collect": 1, "wineBottle": 5, "brush": 1, "lucky": 3},
+  "poolTiers": [3, 6, 9, 12, 15, 18, 20],
+  "filler": [
+    {"coins": 100}, {"items": [{"id": "lumber", "qty": 5}]}, {"coins": 200}, {"ribbons": 1}, {"items": [{"id": "sugar", "qty": 5}, {"id": "flour", "qty": 5}]},
+    {"coins": 300}, {"items": [{"id": "nails", "qty": 10}]}, {"ribbons": 1}, {"coins": 500}, {"items": [{"id": "paint", "qty": 3}]},
+    {"coins": 800}, {"ribbons": 2}, {"items": [{"id": "glass", "qty": 5}]}, {"coins": 1200}, {"ribbons": 2}, {"coins": 2000}
+  ],
+  "pools": {
+    "fall": [{"type": "cosmetic", "id": "hat_candy_corn"}, {"type": "decor", "id": "candy_corn_bunting"}, {"type": "decor", "id": "scarecrow"}, {"type": "cosmetic", "id": "chick_witch_hat"}, {"type": "decor", "id": "pumpkin_patch"}, {"type": "cosmetic", "id": "av_hat_witch"}, {"type": "decor", "id": "jack_o_lantern"}, {"type": "cosmetic", "id": "skin_pumpkin_door"}, {"type": "decor", "id": "candy_corn_statue"}],
+    "winter": [{"type": "cosmetic", "id": "hat_peppermint"}, {"type": "decor", "id": "candy_cane_fence"}, {"type": "decor", "id": "string_lights"}, {"type": "cosmetic", "id": "chick_snow_hat"}, {"type": "decor", "id": "snowman"}, {"type": "cosmetic", "id": "neck_peppermint_scarf"}, {"type": "cosmetic", "id": "av_hat_santa"}, {"type": "cosmetic", "id": "skin_snowy_eaves"}, {"type": "decor", "id": "christmas_tree"}],
+    "spring": [{"type": "cosmetic", "id": "hat_bunny_ears"}, {"type": "decor", "id": "egg_basket"}, {"type": "decor", "id": "bunny_topiary"}, {"type": "cosmetic", "id": "chick_egg_cap"}, {"type": "decor", "id": "flower_arch"}, {"type": "cosmetic", "id": "av_hat_bunny"}, {"type": "cosmetic", "id": "skin_pastel_trim"}, {"type": "decor", "id": "candy_egg_tree"}],
+    "summer": [{"type": "cosmetic", "id": "hat_cow_sunglasses"}, {"type": "decor", "id": "beach_umbrella"}, {"type": "decor", "id": "tiki_torch"}, {"type": "cosmetic", "id": "chick_flower"}, {"type": "decor", "id": "sandy_patch"}, {"type": "cosmetic", "id": "neck_lei"}, {"type": "cosmetic", "id": "av_hat_visor"}, {"type": "decor", "id": "sandcastle"}, {"type": "cosmetic", "id": "skin_beach_shack"}, {"type": "decor", "id": "kiddie_pool"}]
+  }
+}

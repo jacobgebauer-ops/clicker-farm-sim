@@ -1,0 +1,17 @@
+{
+  "lucky": [
+    {"id": "golden_butterfly", "kind": "butterfly", "name": "Golden Butterfly", "weight": 5, "reward": {"coins": 40, "xp": 5}, "text": "A golden butterfly! It left a little shimmer of coins behind."},
+    {"id": "blue_butterfly", "kind": "butterfly", "name": "Blue Morpho", "weight": 2, "reward": {"ribbons": 1}, "text": "A rare blue butterfly! Here's a ribbon for spotting it."},
+    {"id": "ladybug", "kind": "ladybug", "name": "Lucky Ladybug", "weight": 6, "reward": {"coins": 25, "xp": 3}, "text": "A lucky ladybug! Good fortune (and a few coins)."},
+    {"id": "spotted_ladybug", "kind": "ladybug", "name": "Seven Spot", "weight": 2, "reward": {"items": [{"id": "lumber", "qty": 3}]}, "text": "Seven spots, seven lucky splinters. Here's some lumber."},
+    {"id": "tourist", "kind": "tourist", "name": "Traveling Tourist", "weight": 3, "reward": {}, "text": "A tourist from Seattle wants to buy something rustic. They will pay double!"}
+  ],
+  "season": [
+    {"id": "pumpkin_days", "name": "Pumpkin Days", "text": "Everything orange sells for a little more at Claire's and the market.", "when": {"seasons": ["fall"]}, "effects": {"priceMult": [{"tag": "orange", "mult": 1.15}]}},
+    {"id": "candy_cane_lane", "name": "Candy Cane Lane", "text": "Festive goods are in high demand this week.", "when": {"seasons": ["winter"]}, "effects": {"priceMult": [{"tag": "festive", "mult": 1.2}]}},
+    {"id": "egg_hunt", "name": "Spring Egg Hunt", "text": "Eggs and pastel treats sell for more. Lucky critters show up more often.", "when": {"seasons": ["spring"]}, "effects": {"priceMult": [{"tag": "breakfast", "mult": 1.15}], "luckyRate": 1.5}},
+    {"id": "beach_bash", "name": "Beach Bash", "text": "Summer visitors crave sweet treats, and you earn extra XP.", "when": {"seasons": ["summer"]}, "effects": {"priceMult": [{"tag": "sweet", "mult": 1.1}], "xpMult": 1.25}},
+    {"id": "halloween", "name": "Spooky Week", "text": "Pumpkins and caramel apples are flying off the shelves.", "when": {"dates": {"from": "10-25", "to": "10-31"}}, "effects": {"priceMult": [{"tag": "festive", "mult": 1.25}, {"tag": "orange", "mult": 1.1}]}, "gift": {"ribbons": 2}},
+    {"id": "holidays", "name": "Holiday Lights", "text": "Twinkly lights on every fence. Ribbons for everyone.", "when": {"dates": {"from": "12-20", "to": "12-31"}}, "effects": {"luckyRate": 2}, "gift": {"ribbons": 3}}
+  ]
+}
