@@ -3,9 +3,11 @@
 // Run: npm run manifest (also runs before placeholders and content:check)
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { formatContent } from './fmt-json.mjs';
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+// fileURLToPath (not URL.pathname) so Windows drive letters resolve correctly
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (f) => JSON.parse(fs.readFileSync(path.join(root, 'content', f), 'utf8'));
 
 export function buildManifest() {

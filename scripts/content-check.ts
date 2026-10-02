@@ -3,11 +3,13 @@
 // Run: npm run content:check  (also runs as part of npm run build; exits 1 on invalid content)
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { validateRaw, RAW_FILES } from '../src/core/content';
 import { Personal } from '../content/schema';
 import { buildManifest } from './manifest.mjs';
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+// fileURLToPath (not URL.pathname) so Windows drive letters resolve correctly
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const { data, issues } = validateRaw(RAW_FILES);
 let failed = false;
 

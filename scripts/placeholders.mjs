@@ -4,11 +4,13 @@
 // Run: npm run placeholders   (writes public/placeholders/<id>.png)
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { Canvas, hex, shade, PLUM, noise, hashStr } from './pixel.mjs';
 import { buildManifest } from './manifest.mjs';
 import { formatContent } from './fmt-json.mjs';
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+// fileURLToPath (not URL.pathname) so Windows drive letters resolve correctly
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'public/placeholders');
 const CAT = {
   tiles: '#7FC46A', crops: '#5DBB63', items: '#E3B04B', buildings: '#B33A3A', animals: '#B5651D', characters: '#2F5BD3',
