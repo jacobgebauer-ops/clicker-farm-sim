@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import { MiniGameScene } from '../base';
 import type { MiniGame, MiniGameContext } from '../types';
 import { sfx } from '../../../audio/audio';
+import { displayScale } from '../../assets';
 
 const KEY = 'mg_weed_pull';
 const COLS = 5;
@@ -38,7 +39,7 @@ class WeedPullScene extends MiniGameScene {
       g.fillStyle((r + c) % 2 ? 0x9a6b47 : 0x8a5d3c, 1).fillRect(this.ox + c * this.cell + 1, this.oy + r * this.cell + 1, this.cell - 2, this.cell - 2);
       const crop = Math.random() < 0.3;
       const cell: Cell = { kind: crop ? 'crop' : 'empty', age: 0 };
-      if (crop) cell.sprite = this.add.image(this.cx(c), this.cy(r), 'mg_sprout').setScale(1.4);
+      if (crop) cell.sprite = this.add.image(this.cx(c), this.cy(r), 'mg_sprout').setScale(1.4 * displayScale('mg_sprout'));
       this.cells.push(cell);
     }
     this.lunaPenalty = 0;
@@ -82,7 +83,7 @@ class WeedPullScene extends MiniGameScene {
     cell.sprite?.destroy();
     cell.kind = kind;
     cell.age = 0;
-    cell.sprite = this.add.image(this.cx(i % COLS), this.cy(Math.floor(i / COLS)), kind === 'big' ? 'mg_weed_big' : 'mg_weed').setScale(kind === 'big' ? 1.3 : 1.5);
+    cell.sprite = this.add.image(this.cx(i % COLS), this.cy(Math.floor(i / COLS)), kind === 'big' ? 'mg_weed_big' : 'mg_weed').setScale((kind === 'big' ? 1.3 : 1.5) * displayScale(kind === 'big' ? 'mg_weed_big' : 'mg_weed'));
     if (!this.ctx.reduceMotion) this.tweens.add({ targets: cell.sprite, scaleY: cell.sprite.scaleY * 1.1, yoyo: true, repeat: -1, duration: 400 });
   }
 
@@ -139,7 +140,7 @@ class WeedPullScene extends MiniGameScene {
     if (!this.luna && this.lunaIn <= 0) {
       this.lunaDir = Math.random() < 0.5 ? 1 : -1;
       const row = Math.floor(Math.random() * ROWS);
-      this.luna = this.add.sprite(this.lunaDir > 0 ? -20 : this.W + 20, this.cy(row) + 12, 'luna_walk').setOrigin(0.5, 1).setScale(1.5).setDepth(50).setFlipX(this.lunaDir < 0);
+      this.luna = this.add.sprite(this.lunaDir > 0 ? -20 : this.W + 20, this.cy(row) + 12, 'luna_walk').setOrigin(0.5, 1).setScale(1.5 * displayScale('luna_walk')).setDepth(50).setFlipX(this.lunaDir < 0);
       if (this.anims.exists('luna_walk_idle')) this.luna.play('luna_walk_idle');
     }
     if (this.luna) {

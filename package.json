@@ -15,7 +15,8 @@
     "art:process": "node scripts/art-process.mjs",
     "content:check": "tsx scripts/content-check.ts",
     "typecheck": "tsc --noEmit",
-    "format:content": "node scripts/fmt-json.mjs content/*.json content/personal/*.json"
+    "format:content": "node scripts/fmt-json.mjs content/*.json content/personal/*.json",
+    "art:needed": "node scripts/art-needed.mjs"
   },
   "dependencies": {
     "@fontsource/pixelify-sans": "^5.3.0",

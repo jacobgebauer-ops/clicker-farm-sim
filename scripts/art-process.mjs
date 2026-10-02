@@ -144,7 +144,9 @@ function writeNative(e, src, frame, warnings, label) {
     warnings.push(`${label}: image is empty after keying`);
     return null;
   }
-  let out = cropCanvas(src, [box.x, box.y, box.w, box.h]);
+  // ground tiles sit on a fixed 32 px grid, so they are downscaled properly instead of kept native;
+  // paper-doll avatar layers keep their full canvas so every layer still lines up
+  let out = e.category === 'tiles' ? downscale(src, box, e.w, e.h, warnings, label) : e.category === 'avatar' ? src : cropCanvas(src, [box.x, box.y, box.w, box.h]);
   if (usePalette) for (let i = 0; i < out.data.length; i += 4) if (out.data[i + 3]) {
     const p = nearestPalette([out.data[i], out.data[i + 1], out.data[i + 2], 255]);
     out.data[i] = p[0]; out.data[i + 1] = p[1]; out.data[i + 2] = p[2];

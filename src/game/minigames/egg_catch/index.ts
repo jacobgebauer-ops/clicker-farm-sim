@@ -30,7 +30,7 @@ class EggCatchScene extends MiniGameScene {
   protected setup() {
     this.drops = [];
     this.streak = 0;
-    this.basket = this.add.image(this.W / 2, this.H - 90, 'mg_basket').setScale(1.6).setDepth(10);
+    this.basket = this.add.image(this.W / 2, this.H - 90, 'mg_basket').setScale(1.6 * displayScale('mg_basket')).setDepth(10);
     this.targetX = this.W / 2;
     for (let i = 0; i < 5; i++) this.add.image(30 + i * ((this.W - 60) / 4), 76, 'anim_hen').setScale(1.5 * displayScale('anim_hen')).setFlipX(i % 2 === 1);
     const move = (p: Phaser.Input.Pointer) => {
@@ -48,7 +48,7 @@ class EggCatchScene extends MiniGameScene {
     const r = Math.random();
     const kind: Drop['kind'] = r < 0.06 ? 'gold' : r < 0.18 ? 'boot' : r < 0.26 ? 'feather' : 'egg';
     const key = { egg: 'mg_egg', gold: 'mg_egg_gold', boot: 'mg_boot', feather: 'mg_feather' }[kind];
-    const sprite = this.add.image(Phaser.Math.Between(30, this.W - 30), 70, key).setScale(1.5);
+    const sprite = this.add.image(Phaser.Math.Between(30, this.W - 30), 70, key).setScale(1.5 * displayScale(key));
     const speed = (150 + this.elapsed * 4) * this.ctx.difficulty;
     this.drops.push({ kind, sprite, vy: kind === 'feather' ? speed * 0.5 : speed, sway: Math.random() * 6 });
   }

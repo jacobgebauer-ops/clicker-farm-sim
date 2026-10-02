@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { MiniGameScene, ROUND_SECONDS } from '../base';
 import type { MiniGame, MiniGameContext } from '../types';
 import { sfx, bell, audioTime } from '../../../audio/audio';
+import { displayScale } from '../../assets';
 
 const KEY = 'mg_milk_rhythm';
 const LANE_PITCH = [523.25, 659.25, 783.99];
@@ -46,7 +47,7 @@ class MilkRhythmScene extends MiniGameScene {
     const g = this.add.graphics();
     for (const x of this.laneX) {
       g.fillStyle(0x2b1b3d, 0.25).fillRect(x - 30, 70, 60, this.hitY - 40);
-      this.add.image(x, this.hitY + 10, 'mg_pail').setScale(1.5);
+      this.add.image(x, this.hitY + 10, 'mg_pail').setScale(1.5 * displayScale('mg_pail'));
     }
     g.lineStyle(3, 0xffffff, 0.8).lineBetween(10, this.hitY, this.W - 10, this.hitY);
     this.comboText = this.text(this.W / 2, 80, '', 14).setDepth(1000);
@@ -71,7 +72,8 @@ class MilkRhythmScene extends MiniGameScene {
   }
 
   private spawn(lane: number, time: number, gold: boolean) {
-    const sprite = this.add.image(this.laneX[lane], -40, gold ? 'mg_note_gold' : 'mg_note').setScale(1.4).setVisible(false);
+    const noteKey = gold ? 'mg_note_gold' : 'mg_note';
+    const sprite = this.add.image(this.laneX[lane], -40, noteKey).setScale(1.4 * displayScale(noteKey)).setVisible(false);
     this.notes.push({ lane, time, gold, sprite, done: false });
     this.total++;
   }

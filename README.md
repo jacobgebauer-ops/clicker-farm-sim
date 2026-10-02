@@ -104,6 +104,8 @@ npm run art:process -- art-inbox/grok --native --map assets/grok-map.json
 
 `--native` keeps the source resolution (the game fits art to each slot when drawing it), and the map renames sources to manifest ids, targets single frames (`"frame": 3` for a crop's ready stage), and can crop (the Luke and Luna portraits). Placement data for animal art (head anchor for hats, horn span, facing) is in `assets/art-meta.json`.
 
+**What's still needed:** `ART_NEEDED.md` lists every sprite that still uses a placeholder, by priority, with the exact file name to save it as and a ready-to-run image prompt (also in `assets/art-needed.csv` for uploading to an image tool). It opens with a master prompt for Grok Build. Refresh it after each batch with `npm run art:needed`.
+
 To ingest AI-generated art (solid magenta `#FF00FF` background, or already transparent), name each file after its manifest id and run:
 
 ```bash

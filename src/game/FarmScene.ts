@@ -294,7 +294,7 @@ export class FarmScene extends Phaser.Scene {
         speedX: { min: -14, max: 14 },
         rotate: { min: 0, max: 360 },
         alpha: { start: 0.95, end: 0.2 },
-        scale: { min: 0.6, max: 1 },
+        scale: { min: 0.6 * displayScale(tex), max: displayScale(tex) },
         frequency: season === 'winter' ? 220 : 520,
         quantity: 1,
       }).setDepth(9000);
@@ -418,7 +418,7 @@ export class FarmScene extends Phaser.Scene {
       const texKey = derived ? restoredKey : stageKey;
       if (!v) {
         const sprite = this.add.sprite(pos.x, pos.y, texKey).setOrigin(0, 1).setDepth(pos.y);
-        v = { sprite, key: '', roof: this.add.graphics().setDepth(pos.y + 1), bar: this.add.graphics().setDepth(pos.y + 2), bubble: this.add.image(pos.x + pos.w / 2, pos.y - pos.h - 4, 'ui_star').setDepth(pos.y + 3).setScale(0.6).setVisible(false), extras: [] };
+        v = { sprite, key: '', roof: this.add.graphics().setDepth(pos.y + 1), bar: this.add.graphics().setDepth(pos.y + 2), bubble: this.fit(this.add.image(pos.x + pos.w / 2, pos.y - pos.h - 4, 'ui_star').setDepth(pos.y + 3), 'ui_star', undefined, 0.6).setVisible(false), extras: [] };
         this.buildings.set(b.id, v);
       }
       if (v.key !== key) {
@@ -490,7 +490,8 @@ export class FarmScene extends Phaser.Scene {
       if (b.id === 'winery' && s.winery.batches.some((w) => now >= w.readyAt)) bubble = 'item_wine_blackberry';
       if (b.id === 'county_fair') bubble = 'ui_heirloom_seed';
       if (bubble) {
-        v.bubble.setTexture(bubble).setVisible(true);
+        if (v.bubble.texture.key !== bubble) this.fit(v.bubble.setTexture(bubble), bubble, undefined, 0.6);
+        v.bubble.setVisible(true);
         if (!this.tweens.isTweening(v.bubble) && !s.settings.reduceMotion) this.tweens.add({ targets: v.bubble, y: v.bubble.y - 4, yoyo: true, repeat: -1, duration: 500 });
       } else v.bubble.setVisible(false);
     }
@@ -613,7 +614,7 @@ export class FarmScene extends Phaser.Scene {
     if (this.avatar.getData('key') !== keyNow) {
       this.avatar.removeAll(true);
       for (const k of layers) {
-        const sp = this.add.sprite(0, 0, k).setOrigin(0.5, 1);
+        const sp = this.fit(this.add.sprite(0, 0, k).setOrigin(0.5, 1), k);
         if (this.anims.exists(`${k}_idle`)) sp.play(`${k}_idle`);
         const tint = k === 'avatar_body' ? av.skin : k.includes('hair') ? av.hairColor : k.includes('outfit') ? av.outfitColor : null;
         if (tint) sp.setTint(Phaser.Display.Color.HexStringToColor(tint).color);
@@ -1030,7 +1031,7 @@ export class FarmScene extends Phaser.Scene {
   private burst(x: number, y: number, key: string, n: number) {
     if (store.state.settings.reduceMotion) return;
     for (let i = 0; i < n; i++) {
-      const img = this.add.image(x, y, key).setDepth(9800);
+      const img = this.fit(this.add.image(x, y, key).setDepth(9800), key);
       const ang = Math.random() * Math.PI * 2;
       this.tweens.add({ targets: img, x: x + Math.cos(ang) * 22, y: y + Math.sin(ang) * 16 - 10, alpha: 0, duration: 600 + Math.random() * 300, onComplete: () => img.destroy() });
     }
@@ -1088,7 +1089,7 @@ export class FarmScene extends Phaser.Scene {
     }
     const sprite = this.add.sprite(from.x, from.y, key).setDepth(9600).setOrigin(0.5, ev.kind === 'tourist' ? 1 : 0.5);
     if (this.anims.exists(`${key}_idle`)) sprite.play({ key: `${key}_idle`, frameRate: ev.kind === 'tourist' ? 2 : 8 });
-    if (ev.kind !== 'tourist') sprite.setScale(1.25);
+    this.fit(sprite, key, undefined, ev.kind === 'tourist' ? 1 : 1.25);
     this.critters.push({ sprite, eventId: ev.id, kind: ev.kind, start: this.time.now, dur, from, to, phase: rng.range(0, 6) });
   }
 
